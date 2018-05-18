@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView view = findViewById(R.id.textView);
-        FontHelper.loadExternalTypefaceIntoTextView("fonts/BebasNeue-Regular.ttf", view, this);
+        TextView view = findViewById(R.id.txt_mainTitle);
+        FontHelper.loadExternalTypefaceIntoTextView(this, "fonts/BebasNeue-Regular.ttf", view);
     }
 }

@@ -5,7 +5,7 @@ import android.graphics.Typeface;
 import android.widget.TextView;
 
 public class FontHelper {
-    public static void loadExternalTypefaceIntoTextView(String path, TextView view, Context ctx) {
+    public static void loadExternalTypefaceIntoTextView(Context ctx, String path, TextView view) {
         Typeface tf = Typeface.createFromAsset(ctx.getAssets(), path);
         view.setTypeface(tf);
     }

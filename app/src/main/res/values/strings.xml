@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">WhereAreYou</string>
     <string name="str_appTitle">Where \nAre \nYou</string>
+
+    <string name="str_btn_take_photo">Take picture</string>
+    <string name="str_btn_gallery">Gallery</string>
 </resources>
