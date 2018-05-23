@@ -6,7 +6,10 @@ package de.fhe.wayinc.whereareyou.utils;
 
 import android.content.Context;
 import android.os.Vibrator;
-import android.util.Log;
+
+import java.text.MessageFormat;
+
+import timber.log.Timber;
 
 public class FeedbackHelper {
 
@@ -14,9 +17,10 @@ public class FeedbackHelper {
     public static void vibrate(Context ctx, int duration) {
         Vibrator v = (Vibrator) ctx.getSystemService(Context.VIBRATOR_SERVICE);
         if (v != null) {
+            Timber.d(MessageFormat.format("Vibrating phone for {0}ms", duration));
             v.vibrate(duration);
         } else {
-            Log.w("FeedbackHelper", "Could not vibrate phone: VIBRATOR_SERVICE returned null");
+            Timber.w("VIBRATOR_SERVICE returned null");
         }
     }
 }

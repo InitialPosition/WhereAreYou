@@ -1,5 +1,6 @@
 package de.fhe.wayinc.whereareyou;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import de.fhe.wayinc.whereareyou.utils.FontHelper;
+import de.fhe.wayinc.whereareyou.utils.WindowHelper;
+import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //plant timber debug log tree
+        Timber.plant(new Timber.DebugTree());
 
         //find elements
         TextView view = findViewById(R.id.txt_mainTitle);
@@ -39,5 +45,13 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Gallery Button clicked", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            WindowHelper.hideUI(getWindow().getDecorView());
+        }
     }
 }
