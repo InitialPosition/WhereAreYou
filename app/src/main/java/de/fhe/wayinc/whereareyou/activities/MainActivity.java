@@ -20,6 +20,8 @@ import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String EXTRA_MESSAGE = "de.fhe.wayinc.whereareyou.PLZ";
+
     private static final int TAKE_PICTURE = 1;
     private Uri imageUri = null;
 
@@ -54,7 +56,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO gallery intent
-                Toast.makeText(getApplicationContext(), "Gallery Button clicked", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Gallery Button clicked", Toast.LENGTH_SHORT).show();
+                Intent callAPIsIntent = new Intent(getApplicationContext(), APICallPrintActivity.class);
+                String returnFromAPICall = "34621";
+                callAPIsIntent.putExtra(EXTRA_MESSAGE, returnFromAPICall);
+                startActivity(callAPIsIntent);
             }
         });
     }
