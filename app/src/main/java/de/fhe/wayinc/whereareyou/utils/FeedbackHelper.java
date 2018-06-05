@@ -13,7 +13,7 @@ import timber.log.Timber;
 
 public class FeedbackHelper {
 
-    //vibrate the phone for a duration in ms
+    // vibrate the phone for a duration in ms
     public static void vibrate(Context ctx, int duration) {
         Vibrator v = (Vibrator) ctx.getSystemService(Context.VIBRATOR_SERVICE);
         if (v != null) {
