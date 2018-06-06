@@ -10,11 +10,16 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
+import java.io.File;
+
 import de.fhe.wayinc.whereareyou.R;
+import de.fhe.wayinc.whereareyou.storage.ImageStoreHandler;
 
 import static de.fhe.wayinc.whereareyou.activities.MainActivity.EXTRA_IMAGE;
 
 public class NewImageActivity extends AppCompatActivity {
+
+    File imageFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +29,12 @@ public class NewImageActivity extends AppCompatActivity {
         // load intent extras
         Intent startIntent= getIntent();
         Bundle intentExtras = startIntent.getExtras();
+        imageFile = (File) intentExtras.get(EXTRA_IMAGE);
 
         ImageView imgViewMain = findViewById(R.id.img_edit_main);
 
         Glide.with(this)
-                .load(intentExtras.get(EXTRA_IMAGE))
+                .load(imageFile)
                 .into(imgViewMain);
     }
 
@@ -48,6 +54,8 @@ public class NewImageActivity extends AppCompatActivity {
                 break;
             case R.id.btn_edit_done:
                 // TODO process edited image
+                ImageStoreHandler imageStoreHandler = new ImageStoreHandler(null);
+                imageStoreHandler.saveImageToImageList(imageFile);
                 break;
         }
 

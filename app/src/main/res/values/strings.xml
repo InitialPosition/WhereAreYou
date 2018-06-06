@@ -8,4 +8,7 @@
 
     <string name="str_back">Back</string>
     <string name="str_done">Done</string>
+
+    <string name="str_cam_permission_explanation">This app needs permission to use the camera in order to take photos. Please allow the usage of the camera.</string>
+    <string name="str_cam_permission_title">Camera Permission</string>
 </resources>

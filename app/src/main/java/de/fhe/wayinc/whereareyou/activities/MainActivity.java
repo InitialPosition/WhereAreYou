@@ -1,17 +1,21 @@
 package de.fhe.wayinc.whereareyou.activities;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.hide();
@@ -55,37 +60,30 @@ public class MainActivity extends AppCompatActivity {
         btn_newImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // create an image file
-                imageFile = null;
-                try {
-                    imageFile = SystemHelper.createImageFile(getApplicationContext());
-                } catch (IOException e) {
-                    Timber.e(MessageFormat.format("Error creating the image file: {0}", e));
-                }
-
-                if (imageFile != null) {
-                    // get image URI
-                    Uri imageUri = FileProvider.getUriForFile(getApplicationContext(), FILEPROVIDER, imageFile);
-
-                    // start new image intent
-                    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                            .putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-
-                    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                        startActivityForResult(takePictureIntent, TAKE_PICTURE);
-                    } else {
-                        Timber.e("Could not find compatible camera app");
-                    }
+                //check if we have permission to take a picture
+                if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                    takeNewImage();
                 } else {
-                    Timber.e("Could not start image capture intent: imageFile was NULL");
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,
+                            Manifest.permission.CAMERA)) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this)
+                                .setCancelable(false)
+                                .setTitle(getString(R.string.str_cam_permission_title))
+                                .setMessage(getString(R.string.str_cam_permission_explanation))
+                                .setNeutralButton("OK", null);
+
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                    }
                 }
             }
         });
+
         btn_gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO gallery intent
-                Toast.makeText(getApplicationContext(), "Gallery Button clicked", Toast.LENGTH_SHORT).show();
+                Intent galleryIntent = new Intent(MainActivity.this, GalleryActivity.class);
+                startActivity(galleryIntent);
             }
         });
     }
@@ -103,6 +101,33 @@ public class MainActivity extends AppCompatActivity {
                 break;
             default:
                 Timber.e("OnActivityResult: No request code given");
+        }
+    }
+
+    private void takeNewImage() {
+        // create an image file
+        imageFile = null;
+        try {
+            imageFile = SystemHelper.createImageFile(getApplicationContext());
+        } catch (IOException e) {
+            Timber.e(MessageFormat.format("Error creating the image file: {0}", e));
+        }
+
+        if (imageFile != null) {
+            // get image URI
+            Uri imageUri = FileProvider.getUriForFile(getApplicationContext(), FILEPROVIDER, imageFile);
+
+            // start new image intent
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                    .putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+
+            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                startActivityForResult(takePictureIntent, TAKE_PICTURE);
+            } else {
+                Timber.e("Could not find compatible camera app");
+            }
+        } else {
+            Timber.e("Could not start image capture intent: imageFile was NULL");
         }
     }
 }

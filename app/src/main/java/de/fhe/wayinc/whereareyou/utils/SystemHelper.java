@@ -11,6 +11,7 @@ import android.os.Environment;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.MessageFormat;
 
 public class SystemHelper {
 
@@ -26,7 +27,7 @@ public class SystemHelper {
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = ctx.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
 
-        return File.createTempFile(imageFileName, ".jpg", storageDir);
+        return new File(storageDir, MessageFormat.format("{0}.jpg", imageFileName));
     }
 
     // adds a file to the gallery
