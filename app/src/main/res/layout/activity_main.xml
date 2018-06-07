@@ -26,6 +26,10 @@
         android:layout_marginTop="60dp"
         android:text="@string/str_appTitle"
         android:textColor="@color/col_white"
+        android:shadowColor="@color/col_black"
+        android:shadowDx="10"
+        android:shadowDy="10"
+        android:shadowRadius="4"
         android:textSize="60sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -43,6 +47,10 @@
         android:text="@string/str_btn_take_photo"
         android:textColor="@color/col_white"
         android:textSize="24sp"
+        android:shadowColor="@color/col_black"
+        android:shadowDx="4"
+        android:shadowDy="4"
+        android:shadowRadius="4"
         app:layout_constraintBottom_toTopOf="@+id/btn_gallery"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -60,6 +68,10 @@
         android:text="@string/str_btn_gallery"
         android:textColor="@color/col_white"
         android:textSize="24sp"
+        android:shadowColor="@color/col_black"
+        android:shadowDx="4"
+        android:shadowDy="4"
+        android:shadowRadius="4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

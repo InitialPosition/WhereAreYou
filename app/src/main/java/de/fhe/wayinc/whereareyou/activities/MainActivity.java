@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_IMAGE = "extraImage";
     private static final String FILEPROVIDER = "de.fhe.wayinc.whereareyou.fileprovider";
 
-    private FusedLocationProviderClient mFusedLocationProviderClient;
     private Location foundLocation;
 
     public static final String EXTRA_MESSAGE = "de.fhe.wayinc.whereareyou.PLZ";
@@ -59,25 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             ConstraintLayout layout = findViewById(R.id.layout_main_menu);
-            Drawable bg = getDrawable(R.drawable.mm_bg_0);
-            int random = MathHelper.randomInt(0, 4);
-            switch (random) {
-                case 0:
-                    bg = getDrawable(R.drawable.mm_bg_0);
-                    break;
-                case 1:
-                    bg = getDrawable(R.drawable.mm_bg_1);
-                    break;
-                case 2:
-                    bg = getDrawable(R.drawable.mm_bg_2);
-                    break;
-                case 3:
-                    bg = getDrawable(R.drawable.mm_bg_3);
-                    break;
-                case 4:
-                    bg = getDrawable(R.drawable.mm_bg_4);
-                    break;
-            }
+            Drawable bg = SystemHelper.getRandomBackgroundDrawable(this);
             layout.setBackground(bg);
         }
 
@@ -97,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         // load the correct font into the title
         FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", mainTitle);
 
-        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        FusedLocationProviderClient mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         mFusedLocationProviderClient.getLastLocation()
                 .addOnSuccessListener(this, new OnSuccessListener<Location>() {
                     @Override

@@ -100,9 +100,9 @@ public class APICallPrintActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<NewsResponse> call, Response<NewsResponse> responseNews) {
                 if (responseNews.code() == 200) {
-                    newsTitleText.setText(responseNews.body().getArticles().get(1).getTitle());
+                    newsTitleText.setText(responseNews.body().getArticles().get(0).getTitle());
                     newsTitleText.setPaintFlags(newsTitleText.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-                    newsText.setText(responseNews.body().getArticles().get(1).getSource().getName());
+                    newsText.setText(responseNews.body().getArticles().get(0).getSource().getName());
                 } else {
                     Timber.e(MessageFormat.format("News API returned code {0}", responseNews.code()));
                 }
