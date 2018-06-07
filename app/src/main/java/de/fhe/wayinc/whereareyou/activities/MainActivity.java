@@ -5,9 +5,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
@@ -23,6 +25,7 @@ import java.text.MessageFormat;
 
 import de.fhe.wayinc.whereareyou.R;
 import de.fhe.wayinc.whereareyou.utils.FontHelper;
+import de.fhe.wayinc.whereareyou.utils.MathHelper;
 import de.fhe.wayinc.whereareyou.utils.SystemHelper;
 import timber.log.Timber;
 
@@ -39,6 +42,30 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            ConstraintLayout layout = findViewById(R.id.layout_main_menu);
+            Drawable bg = getDrawable(R.drawable.mm_bg_0);
+            int random = MathHelper.randomInt(0, 4);
+            switch (random) {
+                case 0:
+                    bg = getDrawable(R.drawable.mm_bg_0);
+                    break;
+                case 1:
+                    bg = getDrawable(R.drawable.mm_bg_1);
+                    break;
+                case 2:
+                    bg = getDrawable(R.drawable.mm_bg_2);
+                    break;
+                case 3:
+                    bg = getDrawable(R.drawable.mm_bg_3);
+                    break;
+                case 4:
+                    bg = getDrawable(R.drawable.mm_bg_4);
+                    break;
+            }
+            layout.setBackground(bg);
+        }
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {

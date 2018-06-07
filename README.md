@@ -15,7 +15,7 @@ This app allows the user to take an image on their phone. The app then collects 
 ## Roadmap
 Feature|Status
 -------|------
-Taking pictures|UNFINISHED
+Taking pictures|FINISHED
 Saving pictures|UNFINISHED
-Calling APIs|UNFINISHED
+Calling APIs|FINISHED
 Adding Info to Images|UNFINISHED
