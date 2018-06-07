@@ -1,14 +1,17 @@
 package de.fhe.wayinc.whereareyou.activities;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -18,6 +21,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,12 +40,18 @@ import timber.log.Timber;
 public class MainActivity extends AppCompatActivity {
 
     public static final String EXTRA_IMAGE = "extraImage";
-
     private static final String FILEPROVIDER = "de.fhe.wayinc.whereareyou.fileprovider";
+
+    private FusedLocationProviderClient mFusedLocationProviderClient;
+    private Location foundLocation;
+
+    public static final String EXTRA_MESSAGE = "de.fhe.wayinc.whereareyou.PLZ";
+    private static final int PERMISSION_REQUEST_ANSWER = 1;
 
     private static final int TAKE_PICTURE = 1;
     private File imageFile;
 
+    @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +97,26 @@ public class MainActivity extends AppCompatActivity {
         // load the correct font into the title
         FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", mainTitle);
 
-        // set onClickListeners
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        mFusedLocationProviderClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        if (location != null) {
+                            foundLocation = location;
+                        } else {
+                            Timber.e("Location was NULL");
+                        }
+                    }
+                })
+                .addOnFailureListener(this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Timber.e(MessageFormat.format("Call failed: {0}", e));
+                    }
+                });
+
+        //set onClickListeners
         btn_newImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,10 +140,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btn_gallery.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("MissingPermission")
             @Override
             public void onClick(View v) {
-                Intent galleryIntent = new Intent(MainActivity.this, GalleryActivity.class);
-                startActivity(galleryIntent);
+                // TODO gallery intent
+                //Toast.makeText(getApplicationContext(), "Gallery Button clicked", Toast.LENGTH_SHORT).show();
+                Intent callAPIsIntent = new Intent(MainActivity.this, APICallPrintActivity.class);
+
+                Timber.d("LOCATION TEST FIRED");
+
+                callAPIsIntent.putExtra(EXTRA_MESSAGE, foundLocation);
+                startActivity(callAPIsIntent);
             }
         });
     }
