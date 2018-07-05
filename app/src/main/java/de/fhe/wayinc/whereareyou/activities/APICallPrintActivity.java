@@ -11,7 +11,10 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.io.IOException;
 import java.text.MessageFormat;
@@ -50,12 +53,13 @@ public class APICallPrintActivity extends AppCompatActivity {
 
         final TextView latlongText = findViewById(R.id.textView_API_LatLong);
         final TextView plzText = findViewById(R.id.textView_API_PLZ);
-        final TextView temperatureText = findViewById(R.id.textView_API_Temperatur);
+        final TextView temperatureText = findViewById(R.id.textView_API_Temperature);
         final TextView skyText = findViewById(R.id.textView_API_Sky);
         final TextView locationText = findViewById(R.id.textView_API_Location);
         final TextView newsTitleText = findViewById(R.id.textView_API_NewsTitle);
         final TextView newsText = findViewById(R.id.textView_API_NewsText);
         final TextView themeText = findViewById(R.id.textView_API_Theme);
+        final ImageView icon = findViewById(R.id.imageview_API_WeatherIcon);
 
         final TextView testtext1 = findViewById(R.id.testtext1);
         final TextView testtext2 = findViewById(R.id.testtext2);
@@ -103,11 +107,14 @@ public class APICallPrintActivity extends AppCompatActivity {
                 if (responseWeather.code() == 200) {
                     double temp = responseWeather.body().getMain().getTemp() - 273.15;
                     String himmel = responseWeather.body().getWeather().get(0).getDescription();
-                    temperatureText.setText("Temperature: " + temp + "°C");
-                    skyText.setText("Sky: " + himmel);
-                    testtext1.setText("CityID: " + responseWeather.body().getId());
-                    testtext2.setText("Lat: " + responseWeather.body().getCoord().getLat() + " |  Long: " + responseWeather.body().getCoord().getLon());
-                    testtext3.setText("WeathericonId: " + responseWeather.body().getWeather().get(0).getIcon());
+                    temperatureText.setText(MessageFormat.format("Temperature: {0}°C", temp));
+                    skyText.setText(MessageFormat.format("Sky: {0}", himmel));
+                    testtext1.setText("Rain: ");
+                    testtext2.setText("Snow: ");
+                    testtext3.setText(MessageFormat.format("WeathericonId: {0}", responseWeather.body().getWeather().get(0).getIcon()));
+                    Glide.with(getApplicationContext())
+                            .load(MessageFormat.format("http://openweathermap.org/img/w/{0}.png", responseWeather.body().getWeather().get(0).getIcon()))
+                            .into(icon);
                 } else {
                     Timber.e(MessageFormat.format("Weather API returned code {0}", responseWeather.code()));
                 }

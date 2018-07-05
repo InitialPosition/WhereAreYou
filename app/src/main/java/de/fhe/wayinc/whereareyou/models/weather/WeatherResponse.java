@@ -1,5 +1,7 @@
 package de.fhe.wayinc.whereareyou.models.weather;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class WeatherResponse {
@@ -59,7 +61,7 @@ public class WeatherResponse {
 
     public int getId() {
         return id;
-    }
+    }   // Returns strange city code
 
     public String getName() {
         return name;
@@ -163,12 +165,14 @@ public class WeatherResponse {
     }
 
     public class Rain {
+        @SerializedName("3h")
         private int rain3h;
 
         public int getRain3h() { return rain3h; }   // Returns rain volume for the last 3 hours
     }
 
     public class Snow {
+        @SerializedName("3h")
         private int snow3h;
 
         public int getSnow3h() { return snow3h; }   // Returns snow volume for the last 3 hours
@@ -186,7 +190,7 @@ public class WeatherResponse {
 
         public String getCountry() {
             return country;
-        }   // Returns Countrycode
+        }   // Return country code
 
         public int getSunrise() {
             return sunrise;
