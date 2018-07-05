@@ -17,7 +17,7 @@ import java.util.List;
 import de.fhe.wayinc.whereareyou.R;
 import de.fhe.wayinc.whereareyou.api.APIHandler;
 import de.fhe.wayinc.whereareyou.models.NewsResponse;
-import de.fhe.wayinc.whereareyou.models.weather.WeatherResponse;
+import de.fhe.wayinc.whereareyou.models.WeatherResponse;
 import de.fhe.wayinc.whereareyou.utils.APIHelper;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,12 +28,12 @@ public class APICallPrintActivity extends AppCompatActivity {
 
     public static final String EXTRA_MESSAGE = "de.fhe.wayinc.whereareyou.PLZ";
 
-    private static final String URL_WEATHER = "https://api.openweathermap.org/data/2.5/";
-    private static final String API_KEY_WEATHER = "PLESDONTSTEAL";
+    static final String URL_WEATHER = "https://api.openweathermap.org/data/2.5/";
+    private static final String API_KEY_WEATHER = "5d92457b0e7ae402210a9590d29c395e";
 
     private String countryCode;
     private static final String URL_NEWS = "https://newsapi.org/v2/";
-    private static final String API_KEY_NEWS = "PLSSTOPTHANC";
+    private static final String API_KEY_NEWS = "4727897250da453592cdc4952c410811";
 
 
     double lat, lon;

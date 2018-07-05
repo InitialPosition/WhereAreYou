@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">WhereAreYou</string>
     <string name="str_appTitle">Where \nAre \nYou</string>
+    <string name="str_appTitle_easteregg">There \nYou \nAre</string>
 
     <string name="str_btn_take_photo">Take picture</string>
     <string name="str_btn_gallery">Gallery</string>
@@ -11,4 +12,6 @@
 
     <string name="str_cam_permission_explanation">This app needs permission to use the camera in order to take photos. Please allow the usage of the camera.</string>
     <string name="str_cam_permission_title">Camera Permission</string>
+
+    <string name="str_descr_weather">The current weather</string>
 </resources>

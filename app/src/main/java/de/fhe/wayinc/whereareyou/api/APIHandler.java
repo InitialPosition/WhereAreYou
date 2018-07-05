@@ -1,7 +1,7 @@
 package de.fhe.wayinc.whereareyou.api;
 
 import de.fhe.wayinc.whereareyou.models.NewsResponse;
-import de.fhe.wayinc.whereareyou.models.weather.WeatherResponse;
+import de.fhe.wayinc.whereareyou.models.WeatherResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;

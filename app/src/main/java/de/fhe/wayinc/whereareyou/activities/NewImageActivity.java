@@ -11,30 +11,39 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 
 import java.io.File;
+import java.text.MessageFormat;
 
 import de.fhe.wayinc.whereareyou.R;
 import de.fhe.wayinc.whereareyou.storage.ImageStoreHandler;
+import timber.log.Timber;
 
 import static de.fhe.wayinc.whereareyou.activities.MainActivity.EXTRA_IMAGE;
 
 public class NewImageActivity extends AppCompatActivity {
 
-    File imageFile;
+    String imagePath;
+    ImageStoreHandler imageStoreHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_image);
 
-        // load intent extras
-        Intent startIntent= getIntent();
-        Bundle intentExtras = startIntent.getExtras();
-        imageFile = (File) intentExtras.get(EXTRA_IMAGE);
-
+        // get imageview handlers
         ImageView imgViewMain = findViewById(R.id.img_edit_main);
+        ImageView imageViewWeather = findViewById(R.id.img_edit_weatherIcon);
+
+        // load intent extras
+        Intent startIntent = getIntent();
+        Bundle intentExtras = startIntent.getExtras();
+        if (intentExtras != null) {
+            imagePath = (String) intentExtras.get(EXTRA_IMAGE);
+        } else {
+            Timber.e("Cannot load image: intentExtras was null");
+        }
 
         Glide.with(this)
-                .load(imageFile)
+                .load(imagePath)
                 .into(imgViewMain);
     }
 
@@ -50,12 +59,20 @@ public class NewImageActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.btn_edit_back:
+                File image = new File(imagePath);
+                if (image.exists()) {
+                    image.delete();
+                    Timber.i(MessageFormat.format("Image {0} deleted", imagePath));
+                }
+
                 finish();
                 break;
             case R.id.btn_edit_done:
                 // TODO process edited image
-                ImageStoreHandler imageStoreHandler = new ImageStoreHandler(null);
-                imageStoreHandler.saveImageToImageList(imageFile);
+                if (imageStoreHandler == null) {
+                    imageStoreHandler = new ImageStoreHandler(null);
+                }
+                //imageStoreHandler.saveImageToImageList(image);
                 break;
         }
 

@@ -1,4 +1,4 @@
-package de.fhe.wayinc.whereareyou.models.weather;
+package de.fhe.wayinc.whereareyou.models;
 
 import java.util.List;
 
