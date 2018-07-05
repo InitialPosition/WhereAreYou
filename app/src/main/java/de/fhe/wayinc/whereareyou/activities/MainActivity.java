@@ -13,11 +13,14 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -33,7 +36,6 @@ import java.text.MessageFormat;
 
 import de.fhe.wayinc.whereareyou.R;
 import de.fhe.wayinc.whereareyou.utils.FontHelper;
-import de.fhe.wayinc.whereareyou.utils.MathHelper;
 import de.fhe.wayinc.whereareyou.utils.SystemHelper;
 import timber.log.Timber;
 
@@ -50,11 +52,17 @@ public class MainActivity extends AppCompatActivity {
     private static final int TAKE_PICTURE = 1;
     private File imageFile;
 
+    private DrawerLayout mDrawerLayout;
+    public static MenuItem choosenTheme;
+
     @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+
+        choosenTheme = findViewById(R.id.nav_oot);
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             ConstraintLayout layout = findViewById(R.id.layout_main_menu);
@@ -134,7 +142,24 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(callAPIsIntent);
             }
         });
+
+        /*NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        // set item as selected to persist highlight
+                        item.setChecked(true);
+                        choosenTheme = item;
+                        mDrawerLayout.closeDrawers();
+                        return true;
+                    }
+                }
+        );*/
+
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

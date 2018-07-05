@@ -5,6 +5,10 @@
     <color name="colorAccent">#FFFFEE</color>
     <color name="col_transparent">#00000000</color>
 
-    <color name="col_white">#FFFFFF</color>
+    <color name="col_white">#ffffff</color>
     <color name="col_black">#000000</color>
+    <color name="col_green">#0CE84C</color>
+    <color name="col_blue">#0D6E98</color>
+    <color name="col_red">#FF130D</color>
+    <color name="col_yellow">#FFD40D</color>
 </resources>

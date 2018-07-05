@@ -1,12 +1,16 @@
 package de.fhe.wayinc.whereareyou.activities;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Paint;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -29,12 +33,11 @@ public class APICallPrintActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "de.fhe.wayinc.whereareyou.PLZ";
 
     private static final String URL_WEATHER = "https://api.openweathermap.org/data/2.5/";
-    private static final String API_KEY_WEATHER = "PLESDONTSTEAL";
+    private static final String API_KEY_WEATHER = "5d92457b0e7ae402210a9590d29c395e";
 
     private String countryCode;
     private static final String URL_NEWS = "https://newsapi.org/v2/";
-    private static final String API_KEY_NEWS = "PLSSTOPTHANC";
-
+    private static final String API_KEY_NEWS = "4727897250da453592cdc4952c410811";
 
     double lat, lon;
 
@@ -44,31 +47,49 @@ public class APICallPrintActivity extends AppCompatActivity {
         setContentView(R.layout.activity_apicall_print);
 
         Intent returnAPIsCallIntent = getIntent();
-        String PLZ = "No zip code found";
 
         final TextView latlongText = findViewById(R.id.textView_API_LatLong);
         final TextView plzText = findViewById(R.id.textView_API_PLZ);
-        final TextView temperaturText = findViewById(R.id.textView_API_Temperatur);
+        final TextView temperatureText = findViewById(R.id.textView_API_Temperatur);
         final TextView skyText = findViewById(R.id.textView_API_Sky);
         final TextView locationText = findViewById(R.id.textView_API_Location);
         final TextView newsTitleText = findViewById(R.id.textView_API_NewsTitle);
         final TextView newsText = findViewById(R.id.textView_API_NewsText);
+        final TextView themeText = findViewById(R.id.textView_API_Theme);
+
+        final TextView testtext1 = findViewById(R.id.testtext1);
+        final TextView testtext2 = findViewById(R.id.testtext2);
+        final TextView testtext3 = findViewById(R.id.testtext3);
+
+        String plz = "0";
         Bundle bundle = returnAPIsCallIntent.getExtras();
 
-        Location location = (Location) bundle.get(EXTRA_MESSAGE);
-        Geocoder geocoder = new Geocoder(this);
-        List<Address> adrList = new ArrayList<>();
-        try {
-            lat = location.getLatitude();
-            lon = location.getLongitude();
-            latlongText.setText("Latitude: " + lat + " | Longitude: " + lon);
-            adrList = geocoder.getFromLocation(lat, lon, 1);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String plz = adrList.get(0).getPostalCode();
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            Location location = (Location) bundle.get(EXTRA_MESSAGE);
+            Geocoder geocoder = new Geocoder(this);
+            List<Address> adrList = new ArrayList<>();
+            try {
+                lat = location.getLatitude();
+                lon = location.getLongitude();
+                latlongText.setText("Latitude: " + lat + " | Longitude: " + lon);
+                adrList = geocoder.getFromLocation(lat, lon, 1);
+                plz = adrList.get(0).getPostalCode();
 
-        countryCode = adrList.get(0).getCountryCode();
+                countryCode = adrList.get(0).getCountryCode();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            plz = "666";
+        }
+
+        if (MainActivity.choosenTheme != null) {
+            themeText.setText(MainActivity.choosenTheme.getTitle());
+        } else {
+            // Use emergency theme
+        }
+
+
         plzText.setText("Zip Code: " + plz);
         locationText.setText("Country: " + countryCode);
 
@@ -82,8 +103,11 @@ public class APICallPrintActivity extends AppCompatActivity {
                 if (responseWeather.code() == 200) {
                     double temp = responseWeather.body().getMain().getTemp() - 273.15;
                     String himmel = responseWeather.body().getWeather().get(0).getDescription();
-                    temperaturText.setText("Temperature: " + temp + "°C");
+                    temperatureText.setText("Temperature: " + temp + "°C");
                     skyText.setText("Sky: " + himmel);
+                    testtext1.setText("CityID: " + responseWeather.body().getId());
+                    testtext2.setText("Lat: " + responseWeather.body().getCoord().getLat() + " |  Long: " + responseWeather.body().getCoord().getLon());
+                    testtext3.setText("WeathericonId: " + responseWeather.body().getWeather().get(0).getIcon());
                 } else {
                     Timber.e(MessageFormat.format("Weather API returned code {0}", responseWeather.code()));
                 }
