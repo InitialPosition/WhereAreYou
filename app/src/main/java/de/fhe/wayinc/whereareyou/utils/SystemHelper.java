@@ -54,7 +54,6 @@ public class SystemHelper {
         drawables.add(R.drawable.mm_bg_2);
         drawables.add(R.drawable.mm_bg_3);
         drawables.add(R.drawable.mm_bg_4);
-        drawables.add(R.drawable.mm_bg_5);
         drawables.add(R.drawable.mm_bg_6);
         drawables.add(R.drawable.mm_bg_7);
         drawables.add(R.drawable.mm_bg_8);

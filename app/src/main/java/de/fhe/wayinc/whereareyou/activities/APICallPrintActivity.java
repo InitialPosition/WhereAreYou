@@ -24,7 +24,7 @@ import java.util.List;
 import de.fhe.wayinc.whereareyou.R;
 import de.fhe.wayinc.whereareyou.api.APIHandler;
 import de.fhe.wayinc.whereareyou.models.NewsResponse;
-import de.fhe.wayinc.whereareyou.models.weather.WeatherResponse;
+import de.fhe.wayinc.whereareyou.models.WeatherResponse;
 import de.fhe.wayinc.whereareyou.utils.APIHelper;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -73,13 +73,17 @@ public class APICallPrintActivity extends AppCompatActivity {
             Geocoder geocoder = new Geocoder(this);
             List<Address> adrList = new ArrayList<>();
             try {
-                lat = location.getLatitude();
-                lon = location.getLongitude();
-                latlongText.setText("Latitude: " + lat + " | Longitude: " + lon);
-                adrList = geocoder.getFromLocation(lat, lon, 1);
-                plz = adrList.get(0).getPostalCode();
+                if (location != null) {
+                    lat = location.getLatitude();
+                    lon = location.getLongitude();
+                    latlongText.setText(MessageFormat.format("Latitude: {0} | Longitude: {1}", lat, lon));
+                    adrList = geocoder.getFromLocation(lat, lon, 1);
+                    plz = adrList.get(0).getPostalCode();
 
-                countryCode = adrList.get(0).getCountryCode();
+                    countryCode = adrList.get(0).getCountryCode();
+                } else {
+                    Timber.e("Could not get location: Location was null");
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }

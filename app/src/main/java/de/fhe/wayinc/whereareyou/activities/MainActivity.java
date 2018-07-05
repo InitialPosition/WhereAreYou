@@ -1,15 +1,14 @@
 package de.fhe.wayinc.whereareyou.activities;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -33,9 +32,13 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import java.io.File;
 import java.io.IOException;
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import de.fhe.wayinc.whereareyou.R;
 import de.fhe.wayinc.whereareyou.utils.FontHelper;
+import de.fhe.wayinc.whereareyou.utils.MathHelper;
 import de.fhe.wayinc.whereareyou.utils.SystemHelper;
 import timber.log.Timber;
 
@@ -47,15 +50,14 @@ public class MainActivity extends AppCompatActivity {
     private Location foundLocation;
 
     public static final String EXTRA_MESSAGE = "de.fhe.wayinc.whereareyou.PLZ";
-    private static final int PERMISSION_REQUEST_ANSWER = 1;
+    private static final int PERMISSION_REQUEST_CAMERA_STORAGE_LOCATION = 1;
 
-    private static final int TAKE_PICTURE = 1;
-    private File imageFile;
+    String mCurrentPhotoPath;
+    private static final int TAKE_PICTURE = 2;
 
     private DrawerLayout mDrawerLayout;
     public static MenuItem choosenTheme;
 
-    @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +84,11 @@ public class MainActivity extends AppCompatActivity {
         TextView mainTitle = findViewById(R.id.txt_mainTitle);
         Button btn_newImage = findViewById(R.id.btn_takePicture);
         Button btn_gallery = findViewById(R.id.btn_gallery);
+
+        // easter egg corner
+        if (MathHelper.randomInt(0, 1000) < 1) {
+            mainTitle.setText(getString(R.string.str_appTitle_easteregg));
+        }
 
         // load the correct font into the title
         FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", mainTitle);
@@ -110,26 +117,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //check if we have permission to take a picture
-                if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+                        && ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+                        && ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                     takeNewImage();
                 } else {
-                    if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,
-                            Manifest.permission.CAMERA)) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this)
-                                .setCancelable(false)
-                                .setTitle(getString(R.string.str_cam_permission_title))
-                                .setMessage(getString(R.string.str_cam_permission_explanation))
-                                .setNeutralButton("OK", null);
-
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
-                    }
+                    ActivityCompat.requestPermissions(MainActivity.this,
+                            new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION},
+                            PERMISSION_REQUEST_CAMERA_STORAGE_LOCATION);
                 }
             }
         });
 
         btn_gallery.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("MissingPermission")
             @Override
             public void onClick(View v) {
                 // TODO gallery intent
@@ -162,13 +162,32 @@ public class MainActivity extends AppCompatActivity {
 
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CAMERA_STORAGE_LOCATION:
+                if (grantResults.length == 3 && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                        && grantResults[1] == PackageManager.PERMISSION_GRANTED
+                        && grantResults[2] == PackageManager.PERMISSION_GRANTED) {
+                    takeNewImage();
+                } else {
+                    Timber.w("Permissions were denied");
+                }
+                break;
+            default:
+                Timber.d(MessageFormat.format("Unknown callback for permission request: Code {0}", requestCode));
+                break;
+        }
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case TAKE_PICTURE:
                 if (resultCode == Activity.RESULT_OK) {
                     Intent imageProcessIntent = new Intent(MainActivity.this, NewImageActivity.class);
-                    imageProcessIntent.putExtra(EXTRA_IMAGE, imageFile);
+                    Bundle imageData = data.getExtras();
+                    imageProcessIntent.putExtra(EXTRA_IMAGE, mCurrentPhotoPath);
                     startActivity(imageProcessIntent);
                 }
                 break;
@@ -177,30 +196,33 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(imageFileName, ".jpg", storageDir);
+
+        mCurrentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
     private void takeNewImage() {
-        // create an image file
-        imageFile = null;
-        try {
-            imageFile = SystemHelper.createImageFile(getApplicationContext());
-        } catch (IOException e) {
-            Timber.e(MessageFormat.format("Error creating the image file: {0}", e));
-        }
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-        if (imageFile != null) {
-            // get image URI
-            Uri imageUri = FileProvider.getUriForFile(getApplicationContext(), FILEPROVIDER, imageFile);
-
-            // start new image intent
-            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                    .putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-
-            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                startActivityForResult(takePictureIntent, TAKE_PICTURE);
-            } else {
-                Timber.e("Could not find compatible camera app");
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                Timber.e(ex);
             }
-        } else {
-            Timber.e("Could not start image capture intent: imageFile was NULL");
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(this, FILEPROVIDER, photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(takePictureIntent, TAKE_PICTURE);
+            }
         }
+
     }
 }
