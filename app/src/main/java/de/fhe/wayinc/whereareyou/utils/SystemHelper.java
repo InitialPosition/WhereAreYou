@@ -28,23 +28,6 @@ public class SystemHelper {
         return timestamp.toString();
     }
 
-    // creates a new image file handle and returns it
-    public static File createImageFile(Context ctx) throws IOException {
-        String timeStamp = getCurrentTimeStamp();
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = ctx.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-
-        return new File(storageDir, MessageFormat.format("{0}.jpg", imageFileName));
-    }
-
-    // adds a file to the gallery
-    public static void galleryAddPic(Context ctx, File file) {
-        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        Uri contentUri = Uri.fromFile(file);
-        mediaScanIntent.setData(contentUri);
-        ctx.sendBroadcast(mediaScanIntent);
-    }
-
     // gets a random background for the main menu
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static Drawable getRandomBackgroundDrawable(Context ctx) {

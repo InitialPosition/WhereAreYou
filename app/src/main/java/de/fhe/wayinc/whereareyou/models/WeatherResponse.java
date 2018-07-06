@@ -147,13 +147,13 @@ public class WeatherResponse {
 
     public class Wind {
         private double speed;
-        private int deg;
+        private double deg;
 
         public double getSpeed() {
             return speed;
         }   // Returns wind speed in m/s
 
-        public int getDeg() {
+        public double getDeg() {
             return deg;
         }   //Returns the direction of the wind
     }
