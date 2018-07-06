@@ -91,11 +91,11 @@ public class APICallPrintActivity extends AppCompatActivity {
             plz = "666";
         }
 
-        if (MainActivity.choosenTheme != null) {
+        /*if (MainActivity.choosenTheme != null) {
             themeText.setText(MainActivity.choosenTheme.getTitle());
         } else {
             // Use emergency theme
-        }
+        }*/
 
 
         plzText.setText("Zip Code: " + plz);
