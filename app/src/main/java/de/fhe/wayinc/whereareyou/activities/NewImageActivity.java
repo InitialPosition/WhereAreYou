@@ -57,9 +57,10 @@ public class NewImageActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        File image = new File(imagePath);
+
         switch (item.getItemId()) {
             case R.id.btn_edit_back:
-                File image = new File(imagePath);
                 if (image.exists()) {
                     image.delete();
                     Timber.i(MessageFormat.format("Image {0} deleted", imagePath));
@@ -71,8 +72,15 @@ public class NewImageActivity extends AppCompatActivity {
                 // TODO process edited image
                 if (imageStoreHandler == null) {
                     imageStoreHandler = new ImageStoreHandler(null);
+                    imageStoreHandler.loadImageListFromDisk(this);
                 }
-                //imageStoreHandler.saveImageToImageList(image);
+
+                if (!imageStoreHandler.isImageOnList(image)) {
+                    imageStoreHandler.saveImageToImageList(image);
+                    imageStoreHandler.writeOutImageList(this);
+                }
+
+                finish();
                 break;
         }
 

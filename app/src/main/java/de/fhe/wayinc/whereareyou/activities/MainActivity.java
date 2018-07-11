@@ -1,7 +1,9 @@
 package de.fhe.wayinc.whereareyou.activities;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -12,7 +14,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     public static MenuItem choosenTheme;
 
+    @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,12 +136,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // TODO gallery intent
                 //Toast.makeText(getApplicationContext(), "Gallery Button clicked", Toast.LENGTH_SHORT).show();
-                Intent callAPIsIntent = new Intent(MainActivity.this, APICallPrintActivity.class);
+               /* Intent callAPIsIntent = new Intent(MainActivity.this, APICallPrintActivity.class);
 
                 Timber.d("LOCATION TEST FIRED");
 
                 callAPIsIntent.putExtra(EXTRA_MESSAGE, foundLocation);
                 startActivity(callAPIsIntent);
+                */
+
+                Intent galleryIntent = new Intent(MainActivity.this, GalleryActivity.class);
+                startActivity(galleryIntent);
             }
         });
 
@@ -158,7 +164,6 @@ public class MainActivity extends AppCompatActivity {
         );*/
 
     }
-
 
 
     @Override

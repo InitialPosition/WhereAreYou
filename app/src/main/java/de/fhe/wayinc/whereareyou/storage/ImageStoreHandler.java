@@ -1,6 +1,8 @@
 package de.fhe.wayinc.whereareyou.storage;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.Nullable;
 
 import java.io.BufferedReader;
@@ -62,7 +64,7 @@ public class ImageStoreHandler {
     }
 
     public void loadImageListFromDisk(Context ctx) {
-        Timber.d("Loading image list from hard drive...");
+        Timber.d("Loading image list...");
         clearImageList();
 
         String ret = "";
@@ -88,8 +90,15 @@ public class ImageStoreHandler {
             Timber.e(MessageFormat.format("Can not read file: {0}", e.toString()));
         }
 
+        Timber.d(MessageFormat.format("Decoded imageList: {0}", ret));
         String[] items = ret.split(",");
-        imageList.addAll(Arrays.asList(items));
+        if (items.length == 1) {
+            imageList.addAll(Arrays.asList(items).subList(1, items.length));
+        } else {
+            imageList.addAll(Arrays.asList(items));
+        }
+
+        Timber.d(MessageFormat.format("Image list loaded, contains {0} items", imageList.size()));
     }
 
     private String imageListToString() {
@@ -100,5 +109,35 @@ public class ImageStoreHandler {
         }
 
         return csvList.toString();
+    }
+
+    public boolean isImageOnList(File image) {
+        String imagePath = image.getAbsolutePath();
+
+        for (String path : imageList) {
+            if (path.equals(imagePath)) {
+                Timber.d(MessageFormat.format("{0} found on image list", imagePath));
+                return true;
+            }
+        }
+        Timber.d(MessageFormat.format("{0} not found on image list", imagePath));
+        return false;
+    }
+
+    public List<Bitmap> getImageListAsBitmaps() {
+        List<Bitmap> convertedList = new ArrayList<>();
+
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        Bitmap bitmap, bitmapScaled;
+
+        for (String s : imageList) {
+            bitmap = BitmapFactory.decodeFile(s);
+            bitmapScaled = Bitmap.createScaledBitmap(bitmap, 100, 100, false);
+
+            convertedList.add(bitmapScaled);
+        }
+
+        return convertedList;
     }
 }
