@@ -8,6 +8,8 @@
     <string name="str_btn_gallery">Gallery</string>
     <string name="str_img_edit_main_desc">Main Image Editor</string>
 
+    <string name="str_loading">please wait</string>
+
     <string name="str_back">Back</string>
     <string name="str_done">Done</string>
 

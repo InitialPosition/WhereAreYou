@@ -64,9 +64,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mDrawerLayout = findViewById(R.id.drawer_layout);
-
-        choosenTheme = findViewById(R.id.nav_oot);
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             ConstraintLayout layout = findViewById(R.id.layout_main_menu);
@@ -138,8 +135,6 @@ public class MainActivity extends AppCompatActivity {
                 //Toast.makeText(getApplicationContext(), "Gallery Button clicked", Toast.LENGTH_SHORT).show();
                /* Intent callAPIsIntent = new Intent(MainActivity.this, APICallPrintActivity.class);
 
-                Timber.d("LOCATION TEST FIRED");
-
                 callAPIsIntent.putExtra(EXTRA_MESSAGE, foundLocation);
                 startActivity(callAPIsIntent);
                 */
@@ -148,21 +143,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(galleryIntent);
             }
         });
-
-        /*NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        // set item as selected to persist highlight
-                        item.setChecked(true);
-                        choosenTheme = item;
-                        mDrawerLayout.closeDrawers();
-                        return true;
-                    }
-                }
-        );*/
-
     }
 
 
@@ -193,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent imageProcessIntent = new Intent(MainActivity.this, NewImageActivity.class);
                     Bundle imageData = data.getExtras();
                     imageProcessIntent.putExtra(EXTRA_IMAGE, mCurrentPhotoPath);
+                    imageProcessIntent.putExtra(EXTRA_MESSAGE, foundLocation);
                     startActivity(imageProcessIntent);
                 }
                 break;

@@ -27,7 +27,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Bitte warten"
+        android:text="@string/str_loading"
         android:textColor="@color/col_white"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +40,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Bitte warten"
+        android:text="@string/str_loading"
         android:textColor="@color/col_white"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -98,7 +98,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="TextView"
+        android:text="@string/str_loading"
         android:textColor="@color/col_white"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/textView_API_Location"
@@ -116,7 +116,7 @@
         android:shadowDx="10"
         android:shadowDy="10"
         android:shadowRadius="4"
-        android:text="TextView"
+        android:text="@string/str_loading"
         android:textColor="@color/col_white"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textView_API_NewsTitle"
@@ -132,7 +132,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:textColor="@color/col_white"
-        android:text="TextView"
+        android:text="@string/str_loading"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_API_NewsText" />
 
@@ -144,7 +144,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:textColor="@color/col_white"
-        android:text="TextView"
+        android:text="@string/str_loading"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/testtext1" />
 
@@ -156,7 +156,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:textColor="@color/col_white"
-        android:text="TextView"
+        android:text="@string/str_loading"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/testtext2" />
 
