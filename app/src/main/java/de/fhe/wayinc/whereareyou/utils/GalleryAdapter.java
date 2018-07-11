@@ -15,8 +15,8 @@ public class GalleryAdapter extends BaseAdapter {
     private List<Bitmap> thumbnailList = new ArrayList<>();
     private Context ctx;
 
-    private static final int GALLERY_SIZE = 200;
-    private static final int GALLERY_PADDING = 32;
+    private static final int GALLERY_SIZE = 250;
+    private static final int GALLERY_PADDING = 16;
 
     public GalleryAdapter(Context ctx, @Nullable List<Bitmap> imageList) {
         this.ctx = ctx;

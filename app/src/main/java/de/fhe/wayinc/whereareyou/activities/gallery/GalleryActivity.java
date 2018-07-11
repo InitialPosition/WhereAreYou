@@ -12,11 +12,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import java.util.List;
 
 import de.fhe.wayinc.whereareyou.R;
 import de.fhe.wayinc.whereareyou.storage.ImageStoreHandler;
+import de.fhe.wayinc.whereareyou.utils.FontHelper;
 import de.fhe.wayinc.whereareyou.utils.GalleryAdapter;
 
 public class GalleryActivity extends AppCompatActivity {
@@ -29,6 +31,9 @@ public class GalleryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
+
+        TextView title = findViewById(R.id.gallery_title);
+        FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", title);
 
         builder = new android.support.v7.app.AlertDialog.Builder(this);
 
