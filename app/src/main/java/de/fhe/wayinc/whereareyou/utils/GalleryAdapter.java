@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,13 +45,16 @@ public class GalleryAdapter extends BaseAdapter {
         return 0;
     }
 
+    public void removeItem(int position) {
+        thumbnailList.remove(position);
+        notifyDataSetChanged();
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView currentImageView;
 
         if (convertView == null) {
-            currentImageView = new ImageView(ctx);
-
             currentImageView = new ImageView(ctx);
             currentImageView.setLayoutParams(new ViewGroup.LayoutParams(GALLERY_SIZE, GALLERY_SIZE));
             currentImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);

@@ -1,6 +1,5 @@
 package de.fhe.wayinc.whereareyou.activities;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -31,7 +30,6 @@ import retrofit2.Response;
 import timber.log.Timber;
 
 import static de.fhe.wayinc.whereareyou.activities.MainActivity.EXTRA_IMAGE;
-import static de.fhe.wayinc.whereareyou.activities.MainActivity.EXTRA_MESSAGE;
 
 public class NewImageActivity extends AppCompatActivity {
 
@@ -133,11 +131,18 @@ public class NewImageActivity extends AppCompatActivity {
                         // Handeling a choosen template
                         switch (choosenTemplate.getItemId()) {
                             case R.id.nav_oot:
-                                latnLon.setVisibility(View.INVISIBLE);
-                                cityText.setVisibility(View.INVISIBLE);
+                                tempText.setVisibility(View.VISIBLE);
+                                icon.setVisibility(View.VISIBLE);
+
+                                latnLon.setVisibility(View.GONE);
+                                cityText.setVisibility(View.GONE);
                                 break;
                             case R.id.nav_way:
-                                latnLon.setVisibility(View.INVISIBLE);
+                                latnLon.setVisibility(View.VISIBLE);
+                                cityText.setVisibility(View.VISIBLE);
+
+                                tempText.setVisibility(View.GONE);
+                                icon.setVisibility(View.GONE);
                                 break;
                             case R.id.nav_sat:
                                 latnLon.setVisibility(View.VISIBLE);
@@ -149,8 +154,6 @@ public class NewImageActivity extends AppCompatActivity {
                     }
                 }
         );
-
-
 
 
     }

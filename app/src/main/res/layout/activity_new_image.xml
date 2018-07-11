@@ -28,9 +28,8 @@
             android:id="@+id/img_edit_tempText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginBottom="32dp"
+            android:layout_marginEnd="32dp"
             android:textColor="@color/col_white"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -40,9 +39,8 @@
             android:id="@+id/img_edit_LatnLon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginTop="32dp"
             android:shadowColor="@color/col_black"
             android:shadowDx="10"
             android:shadowDy="10"
@@ -57,9 +55,8 @@
             android:id="@+id/img_edit_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginBottom="32dp"
+            android:layout_marginStart="32dp"
             android:shadowColor="@color/col_black"
             android:shadowDx="10"
             android:shadowDy="10"
@@ -74,16 +71,14 @@
             android:id="@+id/img_edit_icon"
             android:layout_width="116dp"
             android:layout_height="116dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:contentDescription="@string/str_descr_weather"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/noun_timer_1678470"
-            android:contentDescription="@string/str_descr_weather"/>
+            app:srcCompat="@mipmap/noun_timer_1678470" />
 
     </android.support.constraint.ConstraintLayout>
-
 
 
     <!-- Container for contents of drawer-->

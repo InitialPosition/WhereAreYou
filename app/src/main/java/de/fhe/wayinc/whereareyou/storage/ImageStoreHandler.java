@@ -54,11 +54,14 @@ public class ImageStoreHandler {
         try {
             String data = imageListToString();
 
+            if (imageList.size() == 0) {
+                data = "";
+            }
+
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(ctx.openFileOutput(LIST_SAVE_FILE, Context.MODE_PRIVATE));
             outputStreamWriter.write(data);
             outputStreamWriter.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             Timber.e(MessageFormat.format("File write failed: {0}", e.toString()));
         }
     }
@@ -70,21 +73,20 @@ public class ImageStoreHandler {
         String ret = "";
         try {
             InputStream inputStream = ctx.openFileInput(LIST_SAVE_FILE);
-            if ( inputStream != null ) {
+            if (inputStream != null) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                 String receiveString = "";
                 StringBuilder stringBuilder = new StringBuilder();
 
-                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                while ((receiveString = bufferedReader.readLine()) != null) {
                     stringBuilder.append(receiveString);
                 }
 
                 inputStream.close();
                 ret = stringBuilder.toString();
             }
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             Timber.e(MessageFormat.format("File not found: {0}", e.toString()));
         } catch (IOException e) {
             Timber.e(MessageFormat.format("Can not read file: {0}", e.toString()));
@@ -92,18 +94,22 @@ public class ImageStoreHandler {
 
         Timber.d(MessageFormat.format("Decoded imageList: {0}", ret));
         String[] items = ret.split(",");
-        if (items.length == 1) {
-            imageList.addAll(Arrays.asList(items).subList(1, items.length));
-        } else {
-            imageList.addAll(Arrays.asList(items));
+        imageList.addAll(Arrays.asList(items));
+        if (imageList.get(0).contentEquals("")) {
+            imageList.remove(0);
         }
 
         Timber.d(MessageFormat.format("Image list loaded, contains {0} items", imageList.size()));
     }
 
+    public void removeImageFromList(int position) {
+        Timber.i(MessageFormat.format("Removing image {0}...", position));
+        imageList.remove(position);
+    }
+
     private String imageListToString() {
         StringBuilder csvList = new StringBuilder();
-        for(String s : imageList){
+        for (String s : imageList) {
             csvList.append(s);
             csvList.append(",");
         }

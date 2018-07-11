@@ -3,7 +3,6 @@ package de.fhe.wayinc.whereareyou.activities;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -38,6 +37,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import de.fhe.wayinc.whereareyou.R;
+import de.fhe.wayinc.whereareyou.activities.gallery.GalleryActivity;
 import de.fhe.wayinc.whereareyou.utils.FontHelper;
 import de.fhe.wayinc.whereareyou.utils.MathHelper;
 import de.fhe.wayinc.whereareyou.utils.SystemHelper;
@@ -83,11 +83,6 @@ public class MainActivity extends AppCompatActivity {
         TextView mainTitle = findViewById(R.id.txt_mainTitle);
         Button btn_newImage = findViewById(R.id.btn_takePicture);
         Button btn_gallery = findViewById(R.id.btn_gallery);
-
-        // easter egg corner
-        if (MathHelper.randomInt(0, 1000) < 1) {
-            mainTitle.setText(getString(R.string.str_appTitle_easteregg));
-        }
 
         // load the correct font into the title
         FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", mainTitle);

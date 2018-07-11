@@ -8,9 +8,9 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -101,13 +101,13 @@ public class APICallPrintActivity extends AppCompatActivity {
         plzText.setText("Zip Code: " + plz);
         locationText.setText("Country: " + countryCode);
 
-        APIHandler weatherClient = APIHelper.createAPIHandler(URL_WEATHER);
         APIHandler newsClient = APIHelper.createAPIHandler(URL_NEWS);
+        APIHandler weatherClient = APIHelper.createAPIHandler(URL_WEATHER);
 
         Call<WeatherResponse> weatherCall = weatherClient.getWeather(lat, lon, API_KEY_WEATHER);
         weatherCall.enqueue(new Callback<WeatherResponse>() {
             @Override
-            public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> responseWeather) {
+            public void onResponse(@NonNull Call<WeatherResponse> call, @NonNull Response<WeatherResponse> responseWeather) {
                 if (responseWeather.code() == 200) {
                     double temp = responseWeather.body().getMain().getTemp() - 273.15;
                     String himmel = responseWeather.body().getWeather().get(0).getDescription();
