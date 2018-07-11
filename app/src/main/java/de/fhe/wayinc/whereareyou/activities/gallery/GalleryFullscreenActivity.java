@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -21,6 +24,17 @@ public class GalleryFullscreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery_fullscreen);
+
+        ImageView icon = findViewById(R.id.img_edit_icon_f);
+        TextView latLonText = findViewById(R.id.img_edit_LatnLon_f);
+        TextView cityText = findViewById(R.id.img_edit_city_f);
+        TextView tempText = findViewById(R.id.img_edit_tempText_f);
+
+        // TODO load correct layout
+        icon.setVisibility(View.GONE);
+        latLonText.setVisibility(View.GONE);
+        cityText.setVisibility(View.GONE);
+        tempText.setVisibility(View.GONE);
 
         Intent imageIntent = getIntent();
         Bundle data = imageIntent.getExtras();
