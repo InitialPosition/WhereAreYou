@@ -64,7 +64,6 @@ public class NewImageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_image);
-
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
         // get imageview handlers
@@ -154,8 +153,6 @@ public class NewImageActivity extends AppCompatActivity {
                     }
                 }
         );
-
-
     }
 
     @Override

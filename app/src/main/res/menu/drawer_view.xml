@@ -20,5 +20,25 @@
             android:layout_marginRight="8dp"
             android:layout_marginTop="16dp"
             android:title="@string/str_sat"/>
+        <item
+            android:id="@+id/nav_temp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="16dp"
+            android:title="@string/str_temp"/>
+        <menu>
+            <item
+                android:id="@+id/nav_tempLeft"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="16dp"
+                android:title="@string/str_tempLeft"/>
+            <item
+                android:id="@+id/nav_tempRight"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="16dp"
+                android:title="@string/str_tempRight"/>
+        </menu>
     </group>
 </menu>
