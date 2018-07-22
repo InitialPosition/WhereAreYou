@@ -3,6 +3,8 @@
     <string name="str_appTitle">Where \nAre \nYou</string>
     <string name="str_appDrawerTitle">Where \nAre \nYou Themes</string>
     <string name="str_appTitle_easteregg">There \nYou \nAre</string>
+    <string name="str_stats">Statistics</string>
+    <string name="str_achievements">Achievements</string>
 
     <string name="str_btn_take_photo">Take picture</string>
     <string name="str_btn_gallery">Gallery</string>
@@ -20,6 +22,28 @@
     <string name="str_tempLeft">Temperature in the left corner</string>
     <string name="str_tempRight">Temperature in the right corner</string>
 
-    <string name="str_descr_weather">The current weather</string>
+    <string name="str_desc_weather">The current weather</string>
+
+    <string name="str_achievement_images_taken_01_name">The first of many</string>
+    <string name="str_achievement_images_taken_01_desc">Take your first photo!</string>
+
+    <string name="str_achievement_images_taken_02_name">Hobby photographer</string>
+    <string name="str_achievement_images_taken_02_desc">Take 50 photos!</string>
+
+    <string name="str_achievement_images_taken_03_name">Camera master</string>
+    <string name="str_achievement_images_taken_03_desc">Take 200 photos!</string>
+
+
+    <string name="str_achievement_cities_visited_01_name">The journey begins</string>
+    <string name="str_achievement_cities_visited_01_desc">First city visited!</string>
+
+    <string name="str_achievement_cities_visited_02_name">Wanderer</string>
+    <string name="str_achievement_cities_visited_02_desc">10 cities visited!</string>
+
+    <string name="str_achievement_cities_visited_03_name">World traveller</string>
+    <string name="str_achievement_cities_visited_03_desc">50 cities visited!</string>
+
+    <string name="str_achievement_secret_01_name">\0???</string>
+    <string name="str_achievement_secret_01_desc">Found the main menu easter egg!</string>
 
 </resources>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.gallery.GalleryFullscreenActivity">
+    tools:context=".activity.gallery.GalleryFullscreenActivity">
 
     <ImageView
         android:id="@+id/img_fullscreen"
@@ -60,7 +60,7 @@
         android:layout_height="116dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:contentDescription="@string/str_descr_weather"
+        android:contentDescription="@string/str_desc_weather"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/noun_timer_1678470" />

@@ -1,4 +1,4 @@
-package de.fhe.wayinc.whereareyou.models;
+package de.fhe.wayinc.whereareyou.model;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -28,17 +28,18 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.NewImageActivity" />
-        <activity android:name=".activities.gallery.GalleryActivity" />
-        <activity android:name=".activities.APICallPrintActivity" />
-        <activity android:name=".activities.gallery.GalleryFullscreenActivity" />
+        <activity android:name=".activity.NewImageActivity" />
+        <activity android:name=".activity.gallery.GalleryActivity" />
+        <activity android:name=".activity.APICallPrintActivity" />
+        <activity android:name=".activity.gallery.GalleryFullscreenActivity" />
+        <activity android:name=".activity.AchievementActivity"></activity>
     </application>
 
 </manifest>

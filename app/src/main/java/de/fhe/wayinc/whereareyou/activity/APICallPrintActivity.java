@@ -1,4 +1,4 @@
-package de.fhe.wayinc.whereareyou.activities;
+package de.fhe.wayinc.whereareyou.activity;
 
 import android.Manifest;
 import android.content.Intent;
@@ -23,9 +23,9 @@ import java.util.List;
 
 import de.fhe.wayinc.whereareyou.R;
 import de.fhe.wayinc.whereareyou.api.APIHandler;
-import de.fhe.wayinc.whereareyou.models.NewsResponse;
-import de.fhe.wayinc.whereareyou.models.WeatherResponse;
-import de.fhe.wayinc.whereareyou.utils.APIHelper;
+import de.fhe.wayinc.whereareyou.model.NewsResponse;
+import de.fhe.wayinc.whereareyou.model.WeatherResponse;
+import de.fhe.wayinc.whereareyou.util.APIHelper;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

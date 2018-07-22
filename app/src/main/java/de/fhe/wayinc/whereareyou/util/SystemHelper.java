@@ -1,4 +1,4 @@
-package de.fhe.wayinc.whereareyou.utils;
+package de.fhe.wayinc.whereareyou.util;
 
 /*
         This class provides functions from system calls
@@ -6,15 +6,9 @@ package de.fhe.wayinc.whereareyou.utils;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package de.fhe.wayinc.whereareyou.activities.gallery;
+package de.fhe.wayinc.whereareyou.activity.gallery;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,14 +18,14 @@ import java.util.List;
 
 import de.fhe.wayinc.whereareyou.R;
 import de.fhe.wayinc.whereareyou.storage.ImageStoreHandler;
-import de.fhe.wayinc.whereareyou.utils.FontHelper;
-import de.fhe.wayinc.whereareyou.utils.GalleryAdapter;
+import de.fhe.wayinc.whereareyou.util.FontHelper;
+import de.fhe.wayinc.whereareyou.util.GalleryAdapter;
 
 public class GalleryActivity extends AppCompatActivity {
 
     protected final static String EXTRA_IMAGE_FULLSCREEN = "image_fullscreen";
     private AlertDialog.Builder builder;
-    boolean canClick;
+    private boolean canClick;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

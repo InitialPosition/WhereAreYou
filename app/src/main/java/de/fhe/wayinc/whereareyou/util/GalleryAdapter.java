@@ -1,4 +1,4 @@
-package de.fhe.wayinc.whereareyou.utils;
+package de.fhe.wayinc.whereareyou.util;
 
 import android.content.Context;
 import android.graphics.Bitmap;

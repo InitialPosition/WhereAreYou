@@ -1,4 +1,4 @@
-package de.fhe.wayinc.whereareyou.activities;
+package de.fhe.wayinc.whereareyou.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -16,10 +16,8 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -37,10 +35,9 @@ import java.util.Date;
 import java.util.Locale;
 
 import de.fhe.wayinc.whereareyou.R;
-import de.fhe.wayinc.whereareyou.activities.gallery.GalleryActivity;
-import de.fhe.wayinc.whereareyou.utils.FontHelper;
-import de.fhe.wayinc.whereareyou.utils.MathHelper;
-import de.fhe.wayinc.whereareyou.utils.SystemHelper;
+import de.fhe.wayinc.whereareyou.activity.gallery.GalleryActivity;
+import de.fhe.wayinc.whereareyou.util.FontHelper;
+import de.fhe.wayinc.whereareyou.util.SystemHelper;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
@@ -55,9 +52,6 @@ public class MainActivity extends AppCompatActivity {
 
     String mCurrentPhotoPath;
     private static final int TAKE_PICTURE = 2;
-
-    private DrawerLayout mDrawerLayout;
-    public static MenuItem choosenTheme;
 
     @SuppressLint("MissingPermission")
     @Override
@@ -83,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         TextView mainTitle = findViewById(R.id.txt_mainTitle);
         Button btn_newImage = findViewById(R.id.btn_takePicture);
         Button btn_gallery = findViewById(R.id.btn_gallery);
+        Button btn_achievements = findViewById(R.id.btn_achievements);
 
         // load the correct font into the title
         FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", mainTitle);
@@ -126,7 +121,6 @@ public class MainActivity extends AppCompatActivity {
         btn_gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO gallery intent
                 //Toast.makeText(getApplicationContext(), "Gallery Button clicked", Toast.LENGTH_SHORT).show();
                /* Intent callAPIsIntent = new Intent(MainActivity.this, APICallPrintActivity.class);
 
@@ -136,6 +130,14 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent galleryIntent = new Intent(MainActivity.this, GalleryActivity.class);
                 startActivity(galleryIntent);
+            }
+        });
+
+        btn_achievements.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent achievementIntent = new Intent(MainActivity.this, AchievementActivity.class);
+                startActivity(achievementIntent);
             }
         });
     }

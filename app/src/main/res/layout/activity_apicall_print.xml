@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/mm_bg_0"
-    tools:context=".activities.APICallPrintActivity">
+    tools:context=".activity.APICallPrintActivity">
 
     <TextView
         android:id="@+id/textView_API_PLZ"

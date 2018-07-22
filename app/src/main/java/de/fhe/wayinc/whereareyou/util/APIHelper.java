@@ -1,4 +1,4 @@
-package de.fhe.wayinc.whereareyou.utils;
+package de.fhe.wayinc.whereareyou.util;
 
 import de.fhe.wayinc.whereareyou.api.APIHandler;
 import retrofit2.Retrofit;

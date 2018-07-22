@@ -1,4 +1,4 @@
-package de.fhe.wayinc.whereareyou.activities;
+package de.fhe.wayinc.whereareyou.activity;
 
 import android.content.Intent;
 import android.location.Location;
@@ -21,16 +21,16 @@ import java.text.MessageFormat;
 
 import de.fhe.wayinc.whereareyou.R;
 import de.fhe.wayinc.whereareyou.api.APIHandler;
-import de.fhe.wayinc.whereareyou.models.WeatherResponse;
+import de.fhe.wayinc.whereareyou.model.WeatherResponse;
 import de.fhe.wayinc.whereareyou.storage.ImageStoreHandler;
-import de.fhe.wayinc.whereareyou.utils.APIHelper;
-import de.fhe.wayinc.whereareyou.utils.StatsHelper;
+import de.fhe.wayinc.whereareyou.util.APIHelper;
+import de.fhe.wayinc.whereareyou.util.StatsHelper;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import timber.log.Timber;
 
-import static de.fhe.wayinc.whereareyou.activities.MainActivity.EXTRA_IMAGE;
+import static de.fhe.wayinc.whereareyou.activity.MainActivity.EXTRA_IMAGE;
 
 public class NewImageActivity extends AppCompatActivity {
 

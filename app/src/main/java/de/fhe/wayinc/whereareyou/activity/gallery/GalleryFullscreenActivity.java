@@ -1,7 +1,6 @@
-package de.fhe.wayinc.whereareyou.activities.gallery;
+package de.fhe.wayinc.whereareyou.activity.gallery;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,13 +9,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 import de.fhe.wayinc.whereareyou.R;
 
-import static de.fhe.wayinc.whereareyou.activities.gallery.GalleryActivity.EXTRA_IMAGE_FULLSCREEN;
+import static de.fhe.wayinc.whereareyou.activity.gallery.GalleryActivity.EXTRA_IMAGE_FULLSCREEN;
 
 public class GalleryFullscreenActivity extends AppCompatActivity {
 

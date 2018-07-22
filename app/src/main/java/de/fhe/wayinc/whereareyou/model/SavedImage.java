@@ -1,4 +1,4 @@
-package de.fhe.wayinc.whereareyou.models;
+package de.fhe.wayinc.whereareyou.model;
 
 public class SavedImage {
     private String path;

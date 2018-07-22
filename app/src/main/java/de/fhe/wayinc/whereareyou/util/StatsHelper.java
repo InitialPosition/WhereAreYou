@@ -1,4 +1,4 @@
-package de.fhe.wayinc.whereareyou.utils;
+package de.fhe.wayinc.whereareyou.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -45,8 +45,8 @@ public class StatsHelper {
     }
 
     public static boolean cityIsNew(Context ctx, String newCity) {
-        List<String> cititesVisited = getCitiesAsList(ctx);
-        if (cititesVisited.contains(newCity)) {
+        List<String> citiesVisited = getCitiesAsList(ctx);
+        if (citiesVisited.contains(newCity)) {
             Timber.d("City new: false (already in list)");
             return false;
         } else {
@@ -69,7 +69,7 @@ public class StatsHelper {
         String csvList = sharedPreferences.getString(PREF_VISITED_CITIES, "");
         String[] items = csvList.split(",");
 
-        return new ArrayList<String>(Arrays.asList(items));
+        return new ArrayList<>(Arrays.asList(items));
     }
 
     private static void saveListToSharedPreferences(Context ctx, List<String> list) {
