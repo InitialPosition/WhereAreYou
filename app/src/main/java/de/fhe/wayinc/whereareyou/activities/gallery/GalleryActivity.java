@@ -39,7 +39,7 @@ public class GalleryActivity extends AppCompatActivity {
 
         final ImageStoreHandler imageStoreHandler = new ImageStoreHandler(null);
         imageStoreHandler.loadImageListFromDisk(this);
-        List<Bitmap> bitmaps = imageStoreHandler.getImageListAsBitmaps();
+        List<Bitmap> bitmaps = imageStoreHandler.getImageListAsScaledBitmaps(100, 100);
 
         GridView mainGridView = findViewById(R.id.grid_view_gallery);
         final GalleryAdapter galleryAdapter = new GalleryAdapter(this, bitmaps);

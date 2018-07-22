@@ -130,7 +130,7 @@ public class ImageStoreHandler {
         return false;
     }
 
-    public List<Bitmap> getImageListAsBitmaps() {
+    public List<Bitmap> getImageListAsScaledBitmaps(int width, int height) {
         List<Bitmap> convertedList = new ArrayList<>();
 
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -139,7 +139,7 @@ public class ImageStoreHandler {
 
         for (String s : imageList) {
             bitmap = BitmapFactory.decodeFile(s);
-            bitmapScaled = Bitmap.createScaledBitmap(bitmap, 100, 100, false);
+            bitmapScaled = Bitmap.createScaledBitmap(bitmap, width, height, false);
 
             convertedList.add(bitmapScaled);
         }

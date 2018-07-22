@@ -24,6 +24,7 @@ import de.fhe.wayinc.whereareyou.api.APIHandler;
 import de.fhe.wayinc.whereareyou.models.WeatherResponse;
 import de.fhe.wayinc.whereareyou.storage.ImageStoreHandler;
 import de.fhe.wayinc.whereareyou.utils.APIHelper;
+import de.fhe.wayinc.whereareyou.utils.StatsHelper;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,6 +42,8 @@ public class NewImageActivity extends AppCompatActivity {
 
     private static final String URL_NEWS = "https://newsapi.org/v2/";
     private static final String API_KEY_NEWS = "4727897250da453592cdc4952c410811";
+
+    private String currentCity;
 
     private String imagePath;
     private ImageStoreHandler imageStoreHandler;
@@ -94,8 +97,9 @@ public class NewImageActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> responseWeather) {
                     if (responseWeather.code() == 200) {
+                        currentCity = responseWeather.body().getName();
                         double temp = responseWeather.body().getMain().getTemp() - 273.15;
-                        cityText.setText(responseWeather.body().getName());
+                        cityText.setText(currentCity);
                         tempText.setText(MessageFormat.format("{0}°C", temp));
                         Glide.with(getApplicationContext())
                                 .load(MessageFormat.format("http://openweathermap.org/img/w/{0}.png", responseWeather.body().getWeather().get(0).getIcon()))
@@ -186,6 +190,11 @@ public class NewImageActivity extends AppCompatActivity {
                 if (!imageStoreHandler.isImageOnList(image)) {
                     imageStoreHandler.saveImageToImageList(image);
                     imageStoreHandler.writeOutImageList(this);
+                }
+
+                StatsHelper.incrementImageStat(this);
+                if (StatsHelper.cityIsNew(this, currentCity)) {
+                    StatsHelper.addCityToStat(this, currentCity);
                 }
 
                 finish();
