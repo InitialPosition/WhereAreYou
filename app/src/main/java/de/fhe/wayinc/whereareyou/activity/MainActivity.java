@@ -37,6 +37,7 @@ import java.util.Locale;
 import de.fhe.wayinc.whereareyou.R;
 import de.fhe.wayinc.whereareyou.activity.gallery.GalleryActivity;
 import de.fhe.wayinc.whereareyou.util.FontHelper;
+import de.fhe.wayinc.whereareyou.util.StatsHelper;
 import de.fhe.wayinc.whereareyou.util.SystemHelper;
 import timber.log.Timber;
 
@@ -62,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             ConstraintLayout layout = findViewById(R.id.layout_main_menu);
             Drawable bg = SystemHelper.getRandomBackgroundDrawable(this);
+            if (bg == getDrawable(R.drawable.mm_bg_11)) {
+                StatsHelper.unlockMysteryAchievement(this);
+            }
+
             layout.setBackground(bg);
         }
 

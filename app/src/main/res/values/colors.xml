@@ -11,4 +11,6 @@
     <color name="col_blue">#0D6E98</color>
     <color name="col_red">#FF130D</color>
     <color name="col_yellow">#FFD40D</color>
+    <color name="col_grey">#706E65</color>
+
 </resources>

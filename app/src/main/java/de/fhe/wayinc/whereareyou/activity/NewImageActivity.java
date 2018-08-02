@@ -24,6 +24,7 @@ import de.fhe.wayinc.whereareyou.api.APIHandler;
 import de.fhe.wayinc.whereareyou.model.WeatherResponse;
 import de.fhe.wayinc.whereareyou.storage.ImageStoreHandler;
 import de.fhe.wayinc.whereareyou.util.APIHelper;
+import de.fhe.wayinc.whereareyou.util.FontHelper;
 import de.fhe.wayinc.whereareyou.util.StatsHelper;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -75,6 +76,10 @@ public class NewImageActivity extends AppCompatActivity {
         tempText = findViewById(R.id.img_edit_tempText);
         latnLon = findViewById(R.id.img_edit_LatnLon);
         cityText = findViewById(R.id.img_edit_city);
+
+        FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", tempText);
+        FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", latnLon);
+        FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", cityText);
 
         choosenTemplate = findViewById(R.id.nav_every); // Presets this template as starting template
 

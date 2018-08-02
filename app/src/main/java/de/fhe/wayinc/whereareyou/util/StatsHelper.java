@@ -16,6 +16,7 @@ public class StatsHelper {
     private final static String PREF_TAKEN_IMAGES = "images_taken";
     private final static String PREF_VISITED_CITIES = "cities_visited";
     private final static String PREF_SHARED_IMAGES = "images_shared";
+    private final static String PREF_MYSTERY = "mystery_achievement";
 
 
     public static void resetStats(Context ctx) {
@@ -70,6 +71,23 @@ public class StatsHelper {
         String[] items = csvList.split(",");
 
         return new ArrayList<>(Arrays.asList(items));
+    }
+
+    public static void unlockMysteryAchievement(Context ctx) {
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putBoolean(PREF_MYSTERY, true).apply();
+    }
+
+    public static boolean mysteryAchievementUnlocked(Context ctx) {
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE);
+
+        if (sharedPreferences.contains(PREF_MYSTERY)) {
+            return sharedPreferences.getBoolean(PREF_MYSTERY, false);
+        } else {
+            return false;
+        }
     }
 
     private static void saveListToSharedPreferences(Context ctx, List<String> list) {

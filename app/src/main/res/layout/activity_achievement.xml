@@ -32,7 +32,7 @@
         android:layout_gravity="start"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/str_achievement_cities_visited_01_name"
+        android:text="@string/str_achievement_images_taken_01_name"
         android:textColor="@color/col_white"
         android:textSize="40sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,11 +45,166 @@
         android:layout_gravity="start"
         android:layout_marginStart="8dp"
         android:layout_marginTop="2dp"
-        android:text="@string/str_achievement_cities_visited_01_desc"
+        android:text="@string/str_achievement_images_taken_01_desc"
         android:textColor="@color/col_white"
         android:textSize="28sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/achievements_text_image_name_01" />
+
+    <TextView
+        android:id="@+id/achievements_text_image_name_02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/str_achievement_images_taken_02_name"
+        android:textColor="@color/col_white"
+        android:textSize="40sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/achievements_text_image_desc_01" />
+
+    <TextView
+        android:id="@+id/achievements_text_image_desc_02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
+        android:text="@string/str_achievement_images_taken_02_desc"
+        android:textColor="@color/col_white"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/achievements_text_image_name_02" />
+
+    <TextView
+        android:id="@+id/achievements_text_image_name_03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/str_achievement_images_taken_03_name"
+        android:textColor="@color/col_white"
+        android:textSize="40sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/achievements_text_image_desc_02" />
+
+    <TextView
+        android:id="@+id/achievements_text_image_desc_03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
+        android:text="@string/str_achievement_images_taken_03_desc"
+        android:textColor="@color/col_white"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/achievements_text_image_name_03" />
+
+    <TextView
+        android:id="@+id/achievements_text_city_name_01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/str_achievement_cities_visited_01_name"
+        android:textColor="@color/col_white"
+        android:textSize="40sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/achievements_text_image_desc_03" />
+
+    <TextView
+        android:id="@+id/achievements_text_city_desc_01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
+        android:text="@string/str_achievement_cities_visited_01_desc"
+        android:textColor="@color/col_white"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/achievements_text_city_name_01" />
+
+    <TextView
+        android:id="@+id/achievements_text_city_name_02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/str_achievement_cities_visited_02_name"
+        android:textColor="@color/col_white"
+        android:textSize="40sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/achievements_text_city_desc_01" />
+
+    <TextView
+        android:id="@+id/achievements_text_city_desc_02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
+        android:text="@string/str_achievement_cities_visited_02_desc"
+        android:textColor="@color/col_white"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/achievements_text_city_name_02" />
+    <TextView
+        android:id="@+id/achievements_text_city_name_03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/str_achievement_cities_visited_03_name"
+        android:textColor="@color/col_white"
+        android:textSize="40sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/achievements_text_city_desc_02" />
+
+    <TextView
+        android:id="@+id/achievements_text_city_desc_03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
+        android:text="@string/str_achievement_cities_visited_03_desc"
+        android:textColor="@color/col_white"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/achievements_text_city_name_03" />
+
+    <TextView
+        android:id="@+id/achievements_text_mystery_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/str_achievement_secret_01_name"
+        android:textColor="@color/col_white"
+        android:textSize="40sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/achievements_text_city_desc_03" />
+
+    <TextView
+        android:id="@+id/achievements_text_mystery_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
+        android:text="@string/str_achievement_secret_01_desc"
+        android:textColor="@color/col_white"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/achievements_text_mystery_name" />
 
     <ImageView
         android:id="@+id/achievements_image_btn_01"
