@@ -1,34 +1,52 @@
 package de.fhe.wayinc.whereareyou.model;
 
+import android.graphics.Color;
+import android.support.annotation.Nullable;
+
 public class SavedImage {
     private String path;
-    private boolean iconEnabled, latLonEnabled, cityEnabled, tempTextEnabled;
+    private String icon;
+    private double savedTemp;
+    private String savedLocation;
+    private String savedLatLon;
+    private String savedFact;
+    private Color textColor;
 
-    public SavedImage(String path, boolean iconEnabled, boolean latLonEnabled, boolean cityEnabled, boolean tempTextEnabled) {
+    public SavedImage(String path, @Nullable String icon, @Nullable String latLon, @Nullable String city, @Nullable double temp, @Nullable String fact, @Nullable Color textColor) {
         this.path = path;
-        this.iconEnabled = iconEnabled;
-        this.latLonEnabled = latLonEnabled;
-        this.cityEnabled = cityEnabled;
-        this.tempTextEnabled = tempTextEnabled;
+        this.icon = icon;
+        this.savedLatLon = latLon;
+        this.savedLocation = city;
+        this.savedTemp = temp;
+        this.savedFact = fact;
+        this.textColor = textColor;
     }
 
     public String getPath() {
         return path;
     }
 
-    public boolean isIconEnabled() {
-        return iconEnabled;
+    public String getIcon() {
+        return icon;
     }
 
-    public boolean isLatLonEnabled() {
-        return latLonEnabled;
+    public double getSavedTemp() {
+        return savedTemp;
     }
 
-    public boolean isCityEnabled() {
-        return cityEnabled;
+    public String getSavedLocation() {
+        return savedLocation;
     }
 
-    public boolean isTempTextEnabled() {
-        return tempTextEnabled;
+    public String getSavedLatLon() {
+        return savedLatLon;
+    }
+
+    public String getSavedFact() {
+        return savedFact;
+    }
+
+    public Color getTextColor() {
+        return textColor;
     }
 }
