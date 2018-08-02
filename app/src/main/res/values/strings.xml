@@ -16,11 +16,14 @@
     <string name="str_done">Done</string>
 
     <string name="str_oot">Weather only</string>
-    <string name="str_way">Where Are You</string>
+    <string name="str_way">Where Are You Standard</string>
     <string name="str_sat">Everything</string>
-    <string name="str_temp">Temperature</string>
-    <string name="str_tempLeft">Temperature in the left corner</string>
-    <string name="str_tempRight">Temperature in the right corner</string>
+    <string name="str_temp">Temperature only</string>
+    <string name="str_textBlack">Change text color to black</string>
+    <string name="str_textWhite">Change text color to white</string>
+    <string name="str_textBlue">Change text color to blue</string>
+    <string name="str_textGreen">Change text color to green</string>
+
 
     <string name="str_desc_weather">The current weather</string>
 

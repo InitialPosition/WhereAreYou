@@ -15,7 +15,7 @@
             android:layout_marginTop="0dp"
             android:title="@string/str_way" />
         <item
-            android:id="@+id/nav_sat"
+            android:id="@+id/nav_every"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="16dp"
@@ -26,19 +26,33 @@
             android:layout_marginRight="8dp"
             android:layout_marginTop="16dp"
             android:title="@string/str_temp"/>
-        <menu>
             <item
-                android:id="@+id/nav_tempLeft"
+                android:id="@+id/nav_textBlack"
                 android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="16dp"
-                android:title="@string/str_tempLeft"/>
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="18dp"
+                android:checkable="true"
+                android:title="@string/str_textBlack" />
             <item
-                android:id="@+id/nav_tempRight"
+                android:id="@+id/nav_textWhite"
                 android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="16dp"
-                android:title="@string/str_tempRight"/>
-        </menu>
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="6dp"
+                android:checkable="true"
+                android:title="@string/str_textWhite"/>
+            <item
+                android:id="@+id/nav_textBlue"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="6dp"
+                android:checkable="true"
+                android:title="@string/str_textBlue"/>
+            <item
+                android:id="@+id/nav_textGreen"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginLeft="10dp"
+                android:checkable="true"
+                android:title="@string/str_textGreen"/>
     </group>
 </menu>

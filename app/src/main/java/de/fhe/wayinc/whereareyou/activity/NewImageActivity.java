@@ -76,6 +76,8 @@ public class NewImageActivity extends AppCompatActivity {
         latnLon = findViewById(R.id.img_edit_LatnLon);
         cityText = findViewById(R.id.img_edit_city);
 
+        choosenTemplate = findViewById(R.id.nav_every); // Presets this template as starting template
+
         // load intent extras
         Intent startIntent = getIntent();
         Bundle intentExtras = startIntent.getExtras();
@@ -126,10 +128,13 @@ public class NewImageActivity extends AppCompatActivity {
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
                         // set item as selected to persist highlight
-                        item.setChecked(true);
                         choosenTemplate = item;
-                        mDrawerLayout.closeDrawers();
+                        tempText.setTextSize(50);
+                        if (choosenTemplate.getItemId() == R.id.nav_temp) { // If the new template is "temperature only" resize the text
+                            tempText.setTextSize(90);
+                        }
 
                         // Handeling a choosen template
                         switch (choosenTemplate.getItemId()) {
@@ -139,6 +144,8 @@ public class NewImageActivity extends AppCompatActivity {
 
                                 latnLon.setVisibility(View.GONE);
                                 cityText.setVisibility(View.GONE);
+
+                                mDrawerLayout.closeDrawers();
                                 break;
                             case R.id.nav_way:
                                 latnLon.setVisibility(View.VISIBLE);
@@ -146,12 +153,47 @@ public class NewImageActivity extends AppCompatActivity {
 
                                 tempText.setVisibility(View.GONE);
                                 icon.setVisibility(View.GONE);
+                                mDrawerLayout.closeDrawers();
                                 break;
-                            case R.id.nav_sat:
+                            case R.id.nav_every:
                                 latnLon.setVisibility(View.VISIBLE);
                                 tempText.setVisibility(View.VISIBLE);
                                 cityText.setVisibility(View.VISIBLE);
                                 icon.setVisibility(View.VISIBLE);
+                                mDrawerLayout.closeDrawers();
+                                break;
+                            case R.id.nav_temp:
+                                latnLon.setVisibility(View.GONE);
+                                cityText.setVisibility(View.GONE);
+                                icon.setVisibility(View.GONE);
+                                tempText.setVisibility(View.VISIBLE);
+                                tempText.setTextSize(90);
+                                mDrawerLayout.closeDrawers();
+                                break;
+                            case R.id.nav_textBlack:
+                                tempText.setTextColor(getResources().getColor(R.color.col_black));
+                                cityText.setTextColor(getResources().getColor(R.color.col_black));
+                                latnLon.setTextColor(getResources().getColor(R.color.col_black));
+                                item.setChecked(true);
+                                break;
+                            case R.id.nav_textWhite:
+                                tempText.setTextColor(getResources().getColor(R.color.col_white));
+                                cityText.setTextColor(getResources().getColor(R.color.col_white));
+                                latnLon.setTextColor(getResources().getColor(R.color.col_white));
+                                item.setChecked(true);
+                                break;
+                            case R.id.nav_textGreen:
+                                tempText.setTextColor(getResources().getColor(R.color.col_green));
+                                cityText.setTextColor(getResources().getColor(R.color.col_green));
+                                latnLon.setTextColor(getResources().getColor(R.color.col_green));
+                                item.setChecked(true);
+                                break;
+                            case R.id.nav_textBlue:
+                                tempText.setTextColor(getResources().getColor(R.color.col_blue));
+                                cityText.setTextColor(getResources().getColor(R.color.col_blue));
+                                latnLon.setTextColor(getResources().getColor(R.color.col_blue));
+                                item.setChecked(true);
+                                break;
                         }
                         return true;
                     }
