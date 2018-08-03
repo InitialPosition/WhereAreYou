@@ -16,6 +16,6 @@ This app allows the user to take an image on their phone. The app then collects 
 Feature|Status
 -------|------
 Taking pictures|FINISHED
-Saving pictures|UNFINISHED
+Saving pictures|FINISHED
 Calling APIs|FINISHED
-Adding Info to Images|UNFINISHED
+Adding Info to Images|FINISHED
