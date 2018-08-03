@@ -1,9 +1,11 @@
 package de.fhe.wayinc.whereareyou.activity.gallery;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -27,10 +29,14 @@ public class GalleryActivity extends AppCompatActivity {
     private AlertDialog.Builder builder;
     private boolean canClick;
 
+    private Context ctx;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
+
+        ctx = this;
 
         TextView title = findViewById(R.id.gallery_title);
         FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", title);
@@ -38,12 +44,26 @@ public class GalleryActivity extends AppCompatActivity {
         builder = new android.support.v7.app.AlertDialog.Builder(this);
 
         final ImageStoreHandler imageStoreHandler = new ImageStoreHandler();
-        imageStoreHandler.loadImageListFromDisk(this);
-        List<Bitmap> bitmaps = imageStoreHandler.getImageListAsScaledBitmaps(100, 100);
+        imageStoreHandler.loadImageListFromDisk(ctx);
 
-        GridView mainGridView = findViewById(R.id.grid_view_gallery);
-        final GalleryAdapter galleryAdapter = new GalleryAdapter(this, bitmaps);
-        mainGridView.setAdapter(galleryAdapter);
+        final GridView mainGridView = findViewById(R.id.grid_view_gallery);
+        final GalleryAdapter galleryAdapter = new GalleryAdapter(this, null);
+
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                final List<Bitmap> bitmaps = imageStoreHandler.getImageListAsScaledBitmaps(100, 100);
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        galleryAdapter.setList(bitmaps);
+                        mainGridView.setAdapter(galleryAdapter);
+                    }
+                });
+            }
+        };
+        thread.start();
 
         canClick = true;
 

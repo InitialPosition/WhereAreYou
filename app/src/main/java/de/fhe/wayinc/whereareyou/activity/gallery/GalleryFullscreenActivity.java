@@ -23,6 +23,7 @@ import java.text.MessageFormat;
 import de.fhe.wayinc.whereareyou.R;
 import de.fhe.wayinc.whereareyou.model.SavedImage;
 import de.fhe.wayinc.whereareyou.storage.ImageStoreHandler;
+import de.fhe.wayinc.whereareyou.util.FontHelper;
 import timber.log.Timber;
 
 import static de.fhe.wayinc.whereareyou.activity.gallery.GalleryActivity.EXTRA_IMAGE_FULLSCREEN;
@@ -50,12 +51,14 @@ public class GalleryFullscreenActivity extends AppCompatActivity {
         TextView latLonText = findViewById(R.id.img_edit_LatnLon_f);
         TextView cityText = findViewById(R.id.img_edit_city_f);
         TextView tempText = findViewById(R.id.img_edit_tempText_f);
+        TextView factText = findViewById(R.id.img_edit_fact_f);
 
         // make all extras invisible
         icon.setVisibility(View.GONE);
         latLonText.setVisibility(View.GONE);
         cityText.setVisibility(View.GONE);
         tempText.setVisibility(View.GONE);
+        factText.setVisibility(View.GONE);
 
         // turn extras with a value visible
         if (image.getIcon() != null) {
@@ -67,14 +70,40 @@ public class GalleryFullscreenActivity extends AppCompatActivity {
         if (image.getSavedLatLon() != null) {
             cityText.setVisibility(View.VISIBLE);
             cityText.setText(image.getSavedLocation());
+
+            cityText.setTextSize(50);
+
+            if (icon.getVisibility() == View.GONE) {
+                cityText.setTextSize(90);
+            }
+
+            FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", cityText);
         }
         if (image.getSavedLatLon() != null) {
             latLonText.setVisibility(View.VISIBLE);
             latLonText.setText(image.getSavedLatLon());
+
+            latLonText.setTextSize(22);
+
+            FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", latLonText);
         }
         if (image.getSavedTemp() != -999) {
             tempText.setVisibility(View.VISIBLE);
             tempText.setText(MessageFormat.format("{0}°C", String.valueOf(image.getSavedTemp())));
+
+            tempText.setTextSize(50);
+
+            if (icon.getVisibility() == View.GONE) {
+                tempText.setTextSize(90);
+            }
+
+            FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", tempText);
+        }
+        if (image.getSavedFact() != null) {
+            factText.setVisibility(View.VISIBLE);
+            factText.setText(image.getSavedFact());
+
+            FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", factText);
         }
 
         // set text color
