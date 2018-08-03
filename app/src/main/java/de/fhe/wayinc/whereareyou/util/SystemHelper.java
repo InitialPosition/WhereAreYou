@@ -6,8 +6,10 @@ package de.fhe.wayinc.whereareyou.util;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;

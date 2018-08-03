@@ -1,8 +1,10 @@
 package de.fhe.wayinc.whereareyou.activity.gallery;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -12,11 +14,16 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.MessageFormat;
 
 import de.fhe.wayinc.whereareyou.R;
 import de.fhe.wayinc.whereareyou.model.SavedImage;
 import de.fhe.wayinc.whereareyou.storage.ImageStoreHandler;
+import timber.log.Timber;
 
 import static de.fhe.wayinc.whereareyou.activity.gallery.GalleryActivity.EXTRA_IMAGE_FULLSCREEN;
 
@@ -67,7 +74,7 @@ public class GalleryFullscreenActivity extends AppCompatActivity {
         }
         if (image.getSavedTemp() != -999) {
             tempText.setVisibility(View.VISIBLE);
-            tempText.setText(String.valueOf(image.getSavedTemp()));
+            tempText.setText(MessageFormat.format("{0}°C", String.valueOf(image.getSavedTemp())));
         }
 
         // set text color
@@ -83,7 +90,7 @@ public class GalleryFullscreenActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_simple_back, menu);
+        inflater.inflate(R.menu.menu_back_export, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -91,11 +98,54 @@ public class GalleryFullscreenActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.btn_edit_back_backOnly:
+            case R.id.btn_edit_back_backExport:
                 finish();
+                return super.onOptionsItemSelected(item);
+
+            case R.id.btn_edit_export_backExport:
+                // magic numbers because I could not find how to get the views size
+                int xPos1 = 0;
+                int yPos1 = 282;
+
+                int xPos2 = 1080;
+                int yPos2 = 1440;
+
+                Bitmap screenshot = renderImage();
+                Bitmap screenshotCropped = Bitmap.createBitmap(screenshot, xPos1, yPos1, xPos2, yPos2);
+
+                shareImage(screenshotCropped);
+
+                return super.onOptionsItemSelected(item);
 
             default:
+                Timber.e("Could not perform action: Unknown menu item");
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private Bitmap renderImage() {
+        View v1 = getWindow().getDecorView().getRootView();
+        v1.setDrawingCacheEnabled(true);
+        Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());
+        v1.setDrawingCacheEnabled(false);
+
+        return bitmap;
+    }
+
+    private void shareImage(Bitmap mBitmap) {
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("image/jpeg");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        File f = new File(android.os.Environment.getExternalStorageDirectory() + File.separator + "temporary_file.jpg");
+        try {
+            f.createNewFile();
+            FileOutputStream fo = new FileOutputStream(f);
+            fo.write(bytes.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        share.putExtra(Intent.EXTRA_STREAM, Uri.parse(android.os.Environment.getExternalStorageDirectory() + File.separator + "temporary_file.jpg"));
+        startActivity(Intent.createChooser(share, getString(R.string.str_share_image)));
     }
 }

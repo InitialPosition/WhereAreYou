@@ -46,4 +46,9 @@
     <string name="str_achievement_secret_01_name">\0???</string>
     <string name="str_achievement_secret_01_desc">Found the main menu easter egg!</string>
 
+    <string name="str_share_image">Share Image</string>
+
+    <string name="str_credits">Share Icon by Gregor Cresnar (https://www.flaticon.com/authors/gregor-cresnar) from www.flaticon.com
+    \nIcons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" target="_blank" title="Creative Commons BY 3.0">CC 3.0 BY</a></string>
+
 </resources>

@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.support.annotation.Nullable;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -70,7 +69,8 @@ public class ImageStoreHandler {
         String listJson = sharedPreferences.getString(SHARED_PREFERENCES_KEY, "[]");
 
         Gson gson = new Gson();
-        Type type = new TypeToken<List<SavedImage>>() {}.getType();
+        Type type = new TypeToken<List<SavedImage>>() {
+        }.getType();
         imageList = gson.fromJson(listJson, type);
     }
 
