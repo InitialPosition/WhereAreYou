@@ -39,11 +39,11 @@ public class ImageStoreHandler {
         return imageList.get(index);
     }
 
-    public void saveImageToImageList(File image, String icon, String latLon, String city, double temp, String fact, int color) {
+    public void saveImageToImageList(File image, String icon, String latLon, String city, double temp, String fact, int color, String date) {
         String imagePath = image.getAbsolutePath();
         Timber.d(MessageFormat.format("Saving image path {0}", imagePath));
 
-        SavedImage newImage = new SavedImage(imagePath, icon, latLon, city, temp, fact, color);
+        SavedImage newImage = new SavedImage(imagePath, icon, latLon, city, temp, fact, color, date);
         imageList.add(newImage);
     }
 

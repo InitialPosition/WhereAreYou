@@ -163,8 +163,8 @@ public class NewImageActivity extends AppCompatActivity {
         // call number fact api
         SimpleDateFormat monthFormat = new SimpleDateFormat("MM", Locale.getDefault());
         SimpleDateFormat dayFormat = new SimpleDateFormat("dd", Locale.getDefault());
-        SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy", Locale.getDefault());
-        Date currentDate = new Date();
+        final SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy", Locale.getDefault());
+        final Date currentDate = new Date();
 
         month = monthFormat.format(currentDate);
         day = dayFormat.format(currentDate);
@@ -194,17 +194,6 @@ public class NewImageActivity extends AppCompatActivity {
 
                         // set item as selected to persist highlight
                         choosenTemplate = item;
-                        if (tempText.getVisibility() == View.VISIBLE && icon.getVisibility() == View.GONE) { // If the new template is "temperature only" resize the text
-                            tempText.setTextSize(90);
-                        } else {
-                            tempText.setTextSize(50);
-                        }
-
-                        if (cityText.getVisibility() == View.VISIBLE && icon.getVisibility() == View.GONE) { // If the new template is "Where are you" resize the text
-                            cityText.setTextSize(90);
-                        } else {
-                            cityText.setTextSize(50);
-                        }
 
                         // Handling a chosen template
                         switch (choosenTemplate.getItemId()) {
@@ -218,6 +207,7 @@ public class NewImageActivity extends AppCompatActivity {
                                 factText.setVisibility(View.GONE);
                                 mDrawerLayout.closeDrawers();
 
+                                date_out = null;
                                 temp_out = temp;
                                 weatherIcon_out = weatherIcon;
 
@@ -236,6 +226,7 @@ public class NewImageActivity extends AppCompatActivity {
                                 factText.setVisibility(View.GONE);
                                 mDrawerLayout.closeDrawers();
 
+                                date_out = MessageFormat.format("{0}.{1}.{2}", day, month, yearFormat.format(currentDate));
                                 latLon_out = MessageFormat.format("Lat: {0} | Lon: {1}", lat.toString(), lon.toString());
                                 currentCity_out = currentCity;
 
@@ -252,6 +243,7 @@ public class NewImageActivity extends AppCompatActivity {
                                 factText.setVisibility(View.GONE);
                                 mDrawerLayout.closeDrawers();
 
+                                date_out = MessageFormat.format("{0}.{1}.{2}", day, month, yearFormat.format(currentDate));
                                 temp_out = temp;
                                 weatherIcon_out = weatherIcon;
                                 latLon_out = MessageFormat.format("Lat: {0} | Lon: {1}", lat.toString(), lon.toString());
@@ -268,6 +260,7 @@ public class NewImageActivity extends AppCompatActivity {
                                 tempText.setTextSize(90);
                                 mDrawerLayout.closeDrawers();
 
+                                date_out = null;
                                 temp_out = temp;
                                 weatherIcon_out = null;
                                 latLon_out = null;
@@ -281,7 +274,9 @@ public class NewImageActivity extends AppCompatActivity {
                                 tempText.setVisibility(View.GONE);
                                 dateText.setVisibility(View.GONE);
                                 factText.setVisibility(View.VISIBLE);
+                                mDrawerLayout.closeDrawers();
 
+                                date_out = null;
                                 temp_out = -999;
                                 weatherIcon_out = null;
                                 latLon_out = null;
@@ -310,6 +305,19 @@ public class NewImageActivity extends AppCompatActivity {
                         cityText.setTextColor(textColor);
                         latnLon.setTextColor(textColor);
                         factText.setTextColor(textColor);
+                        dateText.setTextColor(textColor);
+
+                        if (tempText.getVisibility() == View.VISIBLE && icon.getVisibility() == View.GONE) { // If the new template is "temperature only" resize the text
+                            tempText.setTextSize(90);
+                        } else {
+                            tempText.setTextSize(50);
+                        }
+
+                        if (cityText.getVisibility() == View.VISIBLE && icon.getVisibility() == View.GONE) { // If the new template is "Where are you" resize the text
+                            cityText.setTextSize(90);
+                        } else {
+                            cityText.setTextSize(50);
+                        }
 
                         return true;
                     }
@@ -365,7 +373,7 @@ public class NewImageActivity extends AppCompatActivity {
                 }
 
                 if (!imageStoreHandler.isImageOnList(image)) {
-                    imageStoreHandler.saveImageToImageList(image, weatherIcon_out, latLon_out, currentCity_out, temp_out, fact_out, textColor);
+                    imageStoreHandler.saveImageToImageList(image, weatherIcon_out, latLon_out, currentCity_out, temp_out, fact_out, textColor, date_out);
                     imageStoreHandler.writeOutImageList(this);
                 }
 

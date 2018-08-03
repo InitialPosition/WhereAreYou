@@ -52,6 +52,7 @@ public class GalleryFullscreenActivity extends AppCompatActivity {
         TextView cityText = findViewById(R.id.img_edit_city_f);
         TextView tempText = findViewById(R.id.img_edit_tempText_f);
         TextView factText = findViewById(R.id.img_edit_fact_f);
+        TextView dateText = findViewById(R.id.img_edit_date_f);
 
         // make all extras invisible
         icon.setVisibility(View.GONE);
@@ -59,6 +60,7 @@ public class GalleryFullscreenActivity extends AppCompatActivity {
         cityText.setVisibility(View.GONE);
         tempText.setVisibility(View.GONE);
         factText.setVisibility(View.GONE);
+        dateText.setVisibility(View.GONE);
 
         // turn extras with a value visible
         if (image.getIcon() != null) {
@@ -105,12 +107,21 @@ public class GalleryFullscreenActivity extends AppCompatActivity {
 
             FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", factText);
         }
+        if (image.getDate() != null) {
+            dateText.setVisibility(View.VISIBLE);
+            dateText.setText(image.getDate());
+
+            dateText.setTextSize(22);
+
+            FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", dateText);
+        }
 
         // set text color
         tempText.setTextColor(image.getTextColor());
         cityText.setTextColor(image.getTextColor());
         latLonText.setTextColor(image.getTextColor());
         factText.setTextColor(image.getTextColor());
+        dateText.setTextColor(image.getTextColor());
 
         Glide.with(this)
                 .load(image.getPath())

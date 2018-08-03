@@ -11,8 +11,9 @@ public class SavedImage {
     private String savedLatLon;
     private String savedFact;
     private int textColor;
+    private String date;
 
-    public SavedImage(String path, @Nullable String icon, @Nullable String latLon, @Nullable String city, @Nullable double temp, @Nullable String fact, @Nullable int textColor) {
+    public SavedImage(String path, @Nullable String icon, @Nullable String latLon, @Nullable String city, @Nullable double temp, @Nullable String fact, @Nullable int textColor, String date) {
         this.path = path;
         this.icon = icon;
         this.savedLatLon = latLon;
@@ -20,6 +21,7 @@ public class SavedImage {
         this.savedTemp = temp;
         this.savedFact = fact;
         this.textColor = textColor;
+        this.date = date;
     }
 
     public String getPath() {
@@ -48,5 +50,9 @@ public class SavedImage {
 
     public int getTextColor() {
         return textColor;
+    }
+
+    public String getDate() {
+        return date;
     }
 }
