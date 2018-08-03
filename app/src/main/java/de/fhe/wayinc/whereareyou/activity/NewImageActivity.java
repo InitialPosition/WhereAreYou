@@ -63,6 +63,7 @@ public class NewImageActivity extends AppCompatActivity {
     private ImageView icon;
     private TextView latnLon;
     private TextView cityText;
+    private TextView factText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,10 +77,12 @@ public class NewImageActivity extends AppCompatActivity {
         tempText = findViewById(R.id.img_edit_tempText);
         latnLon = findViewById(R.id.img_edit_LatnLon);
         cityText = findViewById(R.id.img_edit_city);
+        factText = findViewById(R.id.img_edit_fact);
 
         FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", tempText);
         FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", latnLon);
         FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", cityText);
+        FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", factText);
 
         choosenTemplate = findViewById(R.id.nav_every); // Presets this template as starting template
 
@@ -136,9 +139,16 @@ public class NewImageActivity extends AppCompatActivity {
 
                         // set item as selected to persist highlight
                         choosenTemplate = item;
-                        tempText.setTextSize(50);
-                        if (choosenTemplate.getItemId() == R.id.nav_temp) { // If the new template is "temperature only" resize the text
+                        if (tempText.getVisibility() == View.VISIBLE && icon.getVisibility() == View.GONE) { // If the new template is "temperature only" resize the text
                             tempText.setTextSize(90);
+                        }else {
+                            tempText.setTextSize(50);
+                        }
+
+                        if (cityText.getVisibility() == View.VISIBLE && icon.getVisibility() == View.GONE) { // If the new template is "Where are you" resize the text
+                            cityText.setTextSize(90);
+                        }else {
+                            cityText.setTextSize(50);
                         }
 
                         // Handeling a choosen template
@@ -149,15 +159,17 @@ public class NewImageActivity extends AppCompatActivity {
 
                                 latnLon.setVisibility(View.GONE);
                                 cityText.setVisibility(View.GONE);
-
+                                factText.setVisibility(View.GONE);
                                 mDrawerLayout.closeDrawers();
                                 break;
                             case R.id.nav_way:
                                 latnLon.setVisibility(View.VISIBLE);
                                 cityText.setVisibility(View.VISIBLE);
+                                cityText.setTextSize(90);
 
                                 tempText.setVisibility(View.GONE);
                                 icon.setVisibility(View.GONE);
+                                factText.setVisibility(View.GONE);
                                 mDrawerLayout.closeDrawers();
                                 break;
                             case R.id.nav_every:
@@ -165,12 +177,14 @@ public class NewImageActivity extends AppCompatActivity {
                                 tempText.setVisibility(View.VISIBLE);
                                 cityText.setVisibility(View.VISIBLE);
                                 icon.setVisibility(View.VISIBLE);
+                                factText.setVisibility(View.GONE);
                                 mDrawerLayout.closeDrawers();
                                 break;
                             case R.id.nav_temp:
                                 latnLon.setVisibility(View.GONE);
                                 cityText.setVisibility(View.GONE);
                                 icon.setVisibility(View.GONE);
+                                factText.setVisibility(View.GONE);
                                 tempText.setVisibility(View.VISIBLE);
                                 tempText.setTextSize(90);
                                 mDrawerLayout.closeDrawers();
@@ -179,24 +193,28 @@ public class NewImageActivity extends AppCompatActivity {
                                 tempText.setTextColor(getResources().getColor(R.color.col_black));
                                 cityText.setTextColor(getResources().getColor(R.color.col_black));
                                 latnLon.setTextColor(getResources().getColor(R.color.col_black));
+                                factText.setTextColor(getResources().getColor(R.color.col_black));
                                 item.setChecked(true);
                                 break;
                             case R.id.nav_textWhite:
                                 tempText.setTextColor(getResources().getColor(R.color.col_white));
                                 cityText.setTextColor(getResources().getColor(R.color.col_white));
                                 latnLon.setTextColor(getResources().getColor(R.color.col_white));
+                                factText.setTextColor(getResources().getColor(R.color.col_white));
                                 item.setChecked(true);
                                 break;
                             case R.id.nav_textGreen:
                                 tempText.setTextColor(getResources().getColor(R.color.col_green));
                                 cityText.setTextColor(getResources().getColor(R.color.col_green));
                                 latnLon.setTextColor(getResources().getColor(R.color.col_green));
+                                factText.setTextColor(getResources().getColor(R.color.col_green));
                                 item.setChecked(true);
                                 break;
                             case R.id.nav_textBlue:
                                 tempText.setTextColor(getResources().getColor(R.color.col_blue));
                                 cityText.setTextColor(getResources().getColor(R.color.col_blue));
                                 latnLon.setTextColor(getResources().getColor(R.color.col_blue));
+                                factText.setTextColor(getResources().getColor(R.color.col_blue));
                                 item.setChecked(true);
                                 break;
                         }
