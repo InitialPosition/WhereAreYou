@@ -101,8 +101,8 @@ public class APICallPrintActivity extends AppCompatActivity {
         plzText.setText("Zip Code: " + plz);
         locationText.setText("Country: " + countryCode);
 
-        APIHandler newsClient = APIHelper.createAPIHandler(URL_NEWS);
-        APIHandler weatherClient = APIHelper.createAPIHandler(URL_WEATHER);
+        APIHandler newsClient = APIHelper.createAPIHandler(URL_NEWS, true, false);
+        APIHandler weatherClient = APIHelper.createAPIHandler(URL_WEATHER, true, false);
 
         Call<WeatherResponse> weatherCall = weatherClient.getWeather(lat, lon, API_KEY_WEATHER);
         weatherCall.enqueue(new Callback<WeatherResponse>() {

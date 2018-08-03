@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,7 +64,9 @@ public class GalleryAdapter extends BaseAdapter {
         } else {
             currentImageView = (ImageView) convertView;
         }
-        currentImageView.setImageBitmap(thumbnailList.get(position));
+        Glide.with(parent)
+                .load(thumbnailList.get(position))
+                .into(currentImageView);
 
         return currentImageView;
     }

@@ -37,7 +37,7 @@ public class GalleryActivity extends AppCompatActivity {
 
         builder = new android.support.v7.app.AlertDialog.Builder(this);
 
-        final ImageStoreHandler imageStoreHandler = new ImageStoreHandler(null);
+        final ImageStoreHandler imageStoreHandler = new ImageStoreHandler();
         imageStoreHandler.loadImageListFromDisk(this);
         List<Bitmap> bitmaps = imageStoreHandler.getImageListAsScaledBitmaps(100, 100);
 
@@ -52,7 +52,7 @@ public class GalleryActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (canClick) {
                     Intent fullScreenIntent = new Intent(GalleryActivity.this, GalleryFullscreenActivity.class);
-                    fullScreenIntent.putExtra(EXTRA_IMAGE_FULLSCREEN, imageStoreHandler.getImageFromImageList(position));
+                    fullScreenIntent.putExtra(EXTRA_IMAGE_FULLSCREEN, position);
                     startActivity(fullScreenIntent);
                 }
             }

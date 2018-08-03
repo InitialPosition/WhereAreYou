@@ -39,7 +39,8 @@
         <activity android:name=".activity.gallery.GalleryActivity" />
         <activity android:name=".activity.APICallPrintActivity" />
         <activity android:name=".activity.gallery.GalleryFullscreenActivity" />
-        <activity android:name=".activity.AchievementActivity"></activity>
+        <activity android:name=".activity.AchievementActivity" />
+        <activity android:name=".activity.CreditsActivity"></activity>
     </application>
 
 </manifest>

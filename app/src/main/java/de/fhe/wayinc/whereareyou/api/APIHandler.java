@@ -4,6 +4,7 @@ import de.fhe.wayinc.whereareyou.model.NewsResponse;
 import de.fhe.wayinc.whereareyou.model.WeatherResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface APIHandler {
@@ -14,4 +15,8 @@ public interface APIHandler {
     // NEWS CALLS
     @GET("top-headlines")
     Call<NewsResponse> getNews(@Query("country") String countryCode, @Query("apiKey") String key);
+
+    // NUMBER CALLS
+    @GET("{month}/{day}/date")
+    Call<String> getNumberFact(@Path("month") String month, @Path("day") String day);
 }
