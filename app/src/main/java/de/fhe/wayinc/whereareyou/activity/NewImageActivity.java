@@ -47,6 +47,8 @@ public class NewImageActivity extends AppCompatActivity {
     private static final String URL_NUMBERS = "http://numbersapi.com/";
 
     // actual variables
+    private String month;
+    private String day;
     private String currentCity;
     private double temp;
     private String weatherIcon;
@@ -60,6 +62,7 @@ public class NewImageActivity extends AppCompatActivity {
     private String latLon_out;
     private String fact_out;
     private int textColor;
+    private String date_out;
 
     private String imagePath;
     private ImageStoreHandler imageStoreHandler;
@@ -79,6 +82,7 @@ public class NewImageActivity extends AppCompatActivity {
     private TextView latnLon;
     private TextView cityText;
     private TextView factText;
+    private TextView dateText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,11 +97,13 @@ public class NewImageActivity extends AppCompatActivity {
         latnLon = findViewById(R.id.img_edit_LatnLon);
         cityText = findViewById(R.id.img_edit_city);
         factText = findViewById(R.id.img_edit_fact);
+        dateText = findViewById(R.id.img_edit_date);
 
         FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", tempText);
         FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", latnLon);
         FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", cityText);
         FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", factText);
+        FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", dateText);
 
         choosenTemplate = findViewById(R.id.nav_every); // Presets this template as starting template
 
@@ -130,7 +136,7 @@ public class NewImageActivity extends AppCompatActivity {
                         currentCity = responseWeather.body().getName();
                         temp = responseWeather.body().getMain().getTemp() - 273.15;
                         weatherIcon = responseWeather.body().getWeather().get(0).getIcon();
-                        latLon = MessageFormat.format("{0}, {1}", lat.toString(), lon.toString());
+                        latLon = MessageFormat.format("Lat: {0} | Lon: {1}", lat.toString(), lon.toString());
 
                         currentCity_out = currentCity;
                         temp_out = temp;
@@ -157,36 +163,29 @@ public class NewImageActivity extends AppCompatActivity {
         // call number fact api
         SimpleDateFormat monthFormat = new SimpleDateFormat("MM", Locale.getDefault());
         SimpleDateFormat dayFormat = new SimpleDateFormat("dd", Locale.getDefault());
+        SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy", Locale.getDefault());
         Date currentDate = new Date();
 
-        String month = monthFormat.format(currentDate);
-        String day = dayFormat.format(currentDate);
-
-        APIHandler numberHandler = APIHelper.createAPIHandler(URL_NUMBERS, false, true);
-        final Call<String> numberFactCall = numberHandler.getNumberFact(month, day);
-        numberFactCall.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                // TODO handle number api response
-                fact = response.body();
-                fact_out = fact;
-
-                Timber.d("NUMBER API -> 200");
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                // TODO handle number api failure
-                Timber.e(MessageFormat.format("Number Fact API failed: {0}", t));
-            }
-        });
+        month = monthFormat.format(currentDate);
+        day = dayFormat.format(currentDate);
+        date_out = MessageFormat.format("{0}.{1}.{2}", day, month, yearFormat.format(currentDate));
+        dateText.setText(date_out);
+        final APIHandler numberHandler = APIHelper.createAPIHandler(URL_NUMBERS, false, true);
+        newNumberFact(numberHandler);
 
         // load taken picture into main image view
         Glide.with(this)
                 .load(imagePath)
                 .into(imgViewMain);
 
-        // Handeling the cklick on a template
+        factText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newNumberFact(numberHandler);
+            }
+        }  );
+
+        // Handling the click on a template
         NavigationView navigationView = findViewById(R.id.img_edit_nav_view);
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -213,6 +212,7 @@ public class NewImageActivity extends AppCompatActivity {
                                 tempText.setVisibility(View.VISIBLE);
                                 icon.setVisibility(View.VISIBLE);
 
+                                dateText.setVisibility(View.GONE);
                                 latnLon.setVisibility(View.GONE);
                                 cityText.setVisibility(View.GONE);
                                 factText.setVisibility(View.GONE);
@@ -228,6 +228,7 @@ public class NewImageActivity extends AppCompatActivity {
                             case R.id.nav_way:
                                 latnLon.setVisibility(View.VISIBLE);
                                 cityText.setVisibility(View.VISIBLE);
+                                dateText.setVisibility(View.VISIBLE);
                                 cityText.setTextSize(90);
 
                                 tempText.setVisibility(View.GONE);
@@ -247,6 +248,7 @@ public class NewImageActivity extends AppCompatActivity {
                                 tempText.setVisibility(View.VISIBLE);
                                 cityText.setVisibility(View.VISIBLE);
                                 icon.setVisibility(View.VISIBLE);
+                                dateText.setVisibility(View.VISIBLE);
                                 factText.setVisibility(View.GONE);
                                 mDrawerLayout.closeDrawers();
 
@@ -261,6 +263,7 @@ public class NewImageActivity extends AppCompatActivity {
                                 cityText.setVisibility(View.GONE);
                                 icon.setVisibility(View.GONE);
                                 factText.setVisibility(View.GONE);
+                                dateText.setVisibility(View.GONE);
                                 tempText.setVisibility(View.VISIBLE);
                                 tempText.setTextSize(90);
                                 mDrawerLayout.closeDrawers();
@@ -271,6 +274,21 @@ public class NewImageActivity extends AppCompatActivity {
                                 currentCity_out = null;
                                 fact_out = null;
                                 break;
+                            case R.id.nav_fact:
+                                latnLon.setVisibility(View.GONE);
+                                cityText.setVisibility(View.GONE);
+                                icon.setVisibility(View.GONE);
+                                tempText.setVisibility(View.GONE);
+                                dateText.setVisibility(View.GONE);
+                                factText.setVisibility(View.VISIBLE);
+
+                                temp_out = -999;
+                                weatherIcon_out = null;
+                                latLon_out = null;
+                                currentCity_out = null;
+                                fact_out = fact;
+                                break;
+
                             case R.id.nav_textBlack:
                                 textColor = getResources().getColor(R.color.col_black);
                                 item.setChecked(true);
@@ -297,6 +315,25 @@ public class NewImageActivity extends AppCompatActivity {
                     }
                 }
         );
+    }
+
+    private void newNumberFact(APIHandler handler) {
+        final Call<String> numberFactCall = handler.getNumberFact(month, day);
+        numberFactCall.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                fact = response.body();
+                fact_out = fact;
+                factText.setText(fact);
+
+                Timber.d("NUMBER API -> 200");
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Timber.e(MessageFormat.format("Number Fact API failed: {0}", t));
+            }
+        });
     }
 
     @Override

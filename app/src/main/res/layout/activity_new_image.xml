@@ -63,8 +63,8 @@
             android:id="@+id/img_edit_icon"
             android:layout_width="202dp"
             android:layout_height="200dp"
-            android:layout_marginEnd="250dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginEnd="192dp"
+            android:layout_marginTop="32dp"
             android:contentDescription="@string/str_desc_weather"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -72,17 +72,33 @@
 
         <TextView
             android:id="@+id/img_edit_fact"
-            android:layout_width="101dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="8dp"
+            android:layout_width="268dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="64dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginTop="148dp"
-            android:textColor="@color/col_white"
-            android:textSize="50sp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="340dp"
+            android:background="#99706E65"
+            android:padding="8dp"
             android:text="@string/str_loading"
-            app:layout_constraintBottom_toTopOf="@+id/img_edit_tempText"
+            android:textColor="@color/col_white"
+            android:textSize="26sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_edit_LatnLon" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/img_edit_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/str_loading"
+            android:textColor="@color/col_white"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 
