@@ -51,7 +51,15 @@
 
     <string name="str_share_image">Share Image</string>
 
-    <string name="str_credits">Share Icon by Gregor Cresnar (https://www.flaticon.com/authors/gregor-cresnar) from www.flaticon.com
-    \nIcons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" target="_blank" title="Creative Commons BY 3.0">CC 3.0 BY</a></string>
+    <string name="str_goto_credits">Credits</string>
+    <string name="str_credits">Icons:
+        \n\nIcons made by <a href="https://www.flaticon.com/authors/gregor-cresnar" title="Gregor Cresnar">Gregor Cresnar</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" target="_blank" title="Creative Commons BY 3.0">CC 3.0 BY</a>
+        \n\nIcons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" target="_blank" title="Creative Commons BY 3.0">CC 3.0 BY</a>
+        \n\n\n\nOther libraries used:
+        \n\nGlide made by bumptech (https://github.com/bumptech/glide)
+        \n\nTimber by Jake Wharton (https://github.com/JakeWharton/timber), licensed under the Apache License 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+        \n\nGson by Google Inc. (https://github.com/google/gson), licensed under the Apache License 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+        \n\nretrofit2 by square (https://github.com/square/retrofit), licensed under the Apache License 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+        \n\n\n\nApp developed with ♥ by Jonathan M. and Felix K.</string>
 
 </resources>

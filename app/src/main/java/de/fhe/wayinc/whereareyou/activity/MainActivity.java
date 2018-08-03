@@ -20,6 +20,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -82,7 +83,8 @@ public class MainActivity extends AppCompatActivity {
         TextView mainTitle = findViewById(R.id.txt_mainTitle);
         Button btn_newImage = findViewById(R.id.btn_takePicture);
         Button btn_gallery = findViewById(R.id.btn_gallery);
-        Button btn_achievements = findViewById(R.id.btn_achievements);
+        ImageButton btn_achievements = findViewById(R.id.btn_achievements);
+        TextView btn_credits = findViewById(R.id.text_goto_credits);
 
         // load the correct font into the title
         FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", mainTitle);
@@ -131,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
                 callAPIsIntent.putExtra(EXTRA_MESSAGE, foundLocation);
                 startActivity(callAPIsIntent);
             }
-        }  );
+        });
 
         btn_gallery.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,6 +155,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent achievementIntent = new Intent(MainActivity.this, AchievementActivity.class);
                 startActivity(achievementIntent);
+            }
+        });
+
+        btn_credits.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent creditIntent = new Intent(MainActivity.this, CreditsActivity.class);
+                startActivity(creditIntent);
             }
         });
     }

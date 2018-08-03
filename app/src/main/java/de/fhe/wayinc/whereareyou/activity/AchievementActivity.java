@@ -1,7 +1,7 @@
 package de.fhe.wayinc.whereareyou.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -44,7 +44,7 @@ public class AchievementActivity extends AppCompatActivity {
         for (TextView view : achievements) {
             FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", view);
             view.setTextColor(getResources().getColor(R.color.col_grey));
-            view.setAlpha(0.6f);
+            view.setAlpha(0.9f);
         }
 
         int imageCount = StatsHelper.getImageCount(this);
@@ -83,7 +83,7 @@ public class AchievementActivity extends AppCompatActivity {
     }
 
     public void achieveAMilestone(int ach) {
-        for (int i = ach; i <= ach+1; i++) {
+        for (int i = ach; i <= ach + 1; i++) {
             achievements.get(i).setAlpha(1.0f);
             achievements.get(i).setTextColor(getResources().getColor(R.color.col_white));
         }

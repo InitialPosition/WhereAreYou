@@ -107,9 +107,10 @@ public class GalleryFullscreenActivity extends AppCompatActivity {
         }
 
         // set text color
-        if (image.getTextColor() != null) {
-            // TODO change color of text views
-        }
+        tempText.setTextColor(image.getTextColor());
+        cityText.setTextColor(image.getTextColor());
+        latLonText.setTextColor(image.getTextColor());
+        factText.setTextColor(image.getTextColor());
 
         Glide.with(this)
                 .load(image.getPath())

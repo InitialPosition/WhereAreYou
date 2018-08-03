@@ -1,7 +1,6 @@
 package de.fhe.wayinc.whereareyou.activity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,13 +19,11 @@ import com.bumptech.glide.Glide;
 import java.io.File;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
 import de.fhe.wayinc.whereareyou.R;
 import de.fhe.wayinc.whereareyou.api.APIHandler;
-import de.fhe.wayinc.whereareyou.model.SavedImage;
 import de.fhe.wayinc.whereareyou.model.WeatherResponse;
 import de.fhe.wayinc.whereareyou.storage.ImageStoreHandler;
 import de.fhe.wayinc.whereareyou.util.APIHelper;
@@ -62,6 +59,7 @@ public class NewImageActivity extends AppCompatActivity {
     private String weatherIcon_out;
     private String latLon_out;
     private String fact_out;
+    private int textColor;
 
     private String imagePath;
     private ImageStoreHandler imageStoreHandler;
@@ -113,6 +111,8 @@ public class NewImageActivity extends AppCompatActivity {
             Timber.e("Cannot load image: intentExtras was null");
         }
 
+        textColor = getResources().getColor(R.color.col_white);
+
         // Set every infromation that depends on apis -----------------
         if (currentLocation != null) {
             lat = currentLocation.getLatitude();
@@ -135,7 +135,7 @@ public class NewImageActivity extends AppCompatActivity {
                         currentCity_out = currentCity;
                         temp_out = temp;
                         weatherIcon_out = weatherIcon;
-                        latLon_out = latLon;
+                        latLon_out = MessageFormat.format("Lat: {0} | Lon: {1}", lat.toString(), lon.toString());
 
                         cityText.setText(currentCity);
                         tempText.setText(MessageFormat.format("{0}°C", temp));
@@ -197,13 +197,13 @@ public class NewImageActivity extends AppCompatActivity {
                         choosenTemplate = item;
                         if (tempText.getVisibility() == View.VISIBLE && icon.getVisibility() == View.GONE) { // If the new template is "temperature only" resize the text
                             tempText.setTextSize(90);
-                        }else {
+                        } else {
                             tempText.setTextSize(50);
                         }
 
                         if (cityText.getVisibility() == View.VISIBLE && icon.getVisibility() == View.GONE) { // If the new template is "Where are you" resize the text
                             cityText.setTextSize(90);
-                        }else {
+                        } else {
                             cityText.setTextSize(50);
                         }
 
@@ -235,7 +235,7 @@ public class NewImageActivity extends AppCompatActivity {
                                 factText.setVisibility(View.GONE);
                                 mDrawerLayout.closeDrawers();
 
-                                latLon_out = latLon;
+                                latLon_out = MessageFormat.format("Lat: {0} | Lon: {1}", lat.toString(), lon.toString());
                                 currentCity_out = currentCity;
 
                                 temp_out = -999;
@@ -252,7 +252,7 @@ public class NewImageActivity extends AppCompatActivity {
 
                                 temp_out = temp;
                                 weatherIcon_out = weatherIcon;
-                                latLon_out = latLon;
+                                latLon_out = MessageFormat.format("Lat: {0} | Lon: {1}", lat.toString(), lon.toString());
                                 currentCity_out = currentCity;
                                 fact_out = null;
                                 break;
@@ -272,34 +272,27 @@ public class NewImageActivity extends AppCompatActivity {
                                 fact_out = null;
                                 break;
                             case R.id.nav_textBlack:
-                                tempText.setTextColor(getResources().getColor(R.color.col_black));
-                                cityText.setTextColor(getResources().getColor(R.color.col_black));
-                                latnLon.setTextColor(getResources().getColor(R.color.col_black));
-                                factText.setTextColor(getResources().getColor(R.color.col_black));
+                                textColor = getResources().getColor(R.color.col_black);
                                 item.setChecked(true);
                                 break;
                             case R.id.nav_textWhite:
-                                tempText.setTextColor(getResources().getColor(R.color.col_white));
-                                cityText.setTextColor(getResources().getColor(R.color.col_white));
-                                latnLon.setTextColor(getResources().getColor(R.color.col_white));
-                                factText.setTextColor(getResources().getColor(R.color.col_white));
+                                textColor = getResources().getColor(R.color.col_white);
                                 item.setChecked(true);
                                 break;
                             case R.id.nav_textGreen:
-                                tempText.setTextColor(getResources().getColor(R.color.col_green));
-                                cityText.setTextColor(getResources().getColor(R.color.col_green));
-                                latnLon.setTextColor(getResources().getColor(R.color.col_green));
-                                factText.setTextColor(getResources().getColor(R.color.col_green));
+                                textColor = getResources().getColor(R.color.col_green);
                                 item.setChecked(true);
                                 break;
                             case R.id.nav_textBlue:
-                                tempText.setTextColor(getResources().getColor(R.color.col_blue));
-                                cityText.setTextColor(getResources().getColor(R.color.col_blue));
-                                latnLon.setTextColor(getResources().getColor(R.color.col_blue));
-                                factText.setTextColor(getResources().getColor(R.color.col_blue));
+                                textColor = getResources().getColor(R.color.col_blue);
                                 item.setChecked(true);
                                 break;
                         }
+                        tempText.setTextColor(textColor);
+                        cityText.setTextColor(textColor);
+                        latnLon.setTextColor(textColor);
+                        factText.setTextColor(textColor);
+
                         return true;
                     }
                 }
@@ -335,7 +328,7 @@ public class NewImageActivity extends AppCompatActivity {
                 }
 
                 if (!imageStoreHandler.isImageOnList(image)) {
-                    imageStoreHandler.saveImageToImageList(image, weatherIcon_out, latLon_out, currentCity_out, temp_out, fact_out, null);
+                    imageStoreHandler.saveImageToImageList(image, weatherIcon_out, latLon_out, currentCity_out, temp_out, fact_out, textColor);
                     imageStoreHandler.writeOutImageList(this);
                 }
 

@@ -10,9 +10,9 @@ public class SavedImage {
     private String savedLocation;
     private String savedLatLon;
     private String savedFact;
-    private Color textColor;
+    private int textColor;
 
-    public SavedImage(String path, @Nullable String icon, @Nullable String latLon, @Nullable String city, @Nullable double temp, @Nullable String fact, @Nullable Color textColor) {
+    public SavedImage(String path, @Nullable String icon, @Nullable String latLon, @Nullable String city, @Nullable double temp, @Nullable String fact, @Nullable int textColor) {
         this.path = path;
         this.icon = icon;
         this.savedLatLon = latLon;
@@ -46,7 +46,7 @@ public class SavedImage {
         return savedFact;
     }
 
-    public Color getTextColor() {
+    public int getTextColor() {
         return textColor;
     }
 }
