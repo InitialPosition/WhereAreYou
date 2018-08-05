@@ -25,6 +25,6 @@ The app has a simple premise. Take a picture and decide which information should
 1. Save your image by clicking on the check mark in the upper right corner of the menu bar.<br>
 
 ### Extra
-- Use the gallery to look at the pictures you already took. To do this, click on "Gallery" in the main menu.
+- Use the gallery to look at the pictures you already took. To do this, select "Gallery" in the main menu.
 - Share your pictures by selecting them in the gallery and then pressing the share icon in the top right corner of the menu bar.
 - View your achievements by touching the trophy in the top right corner of the main menu.
