@@ -17,12 +17,18 @@ public class CreditsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_credits);
 
+        // set the credits string
         TextView credits = findViewById(R.id.text_credits);
         credits.setText(R.string.str_credits);
 
         FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", credits);
     }
 
+    /**
+     * Set the correct menu
+     * @param menu The menu to edit
+     * @return unused
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -31,6 +37,11 @@ public class CreditsActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * Handle menu selections
+     * @param item The selected item
+     * @return unused
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

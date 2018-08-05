@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,23 +31,29 @@ import static de.fhe.wayinc.whereareyou.activity.gallery.GalleryActivity.EXTRA_I
 
 public class GalleryFullscreenActivity extends AppCompatActivity {
 
+    ImageView fullscreenImageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery_fullscreen);
 
-        // TODO load correct layout
-
+        // get the image position to show
         Intent imageIntent = getIntent();
         Bundle data = imageIntent.getExtras();
-        int imagePos = (int) data.get(EXTRA_IMAGE_FULLSCREEN);
+        int imagePos = 0;
+        if (data != null) {
+            imagePos = (int) data.get(EXTRA_IMAGE_FULLSCREEN);
+        }
 
+        // load the image
         ImageStoreHandler imageStoreHandler = new ImageStoreHandler();
         imageStoreHandler.loadImageListFromDisk(this);
 
         SavedImage image = imageStoreHandler.getImageObjectFromImageList(imagePos);
 
-        ImageView fullscreenImageView = findViewById(R.id.img_fullscreen);
+        // get the layout elements
+        fullscreenImageView = findViewById(R.id.img_fullscreen);
         ImageView icon = findViewById(R.id.img_edit_icon_f);
         TextView latLonText = findViewById(R.id.img_edit_LatnLon_f);
         TextView cityText = findViewById(R.id.img_edit_city_f);
@@ -123,11 +130,17 @@ public class GalleryFullscreenActivity extends AppCompatActivity {
         factText.setTextColor(image.getTextColor());
         dateText.setTextColor(image.getTextColor());
 
+        // load the image into view
         Glide.with(this)
                 .load(image.getPath())
                 .into(fullscreenImageView);
     }
 
+    /**
+     * Set the correct menu
+     * @param menu The menu to set
+     * @return unused
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -136,6 +149,11 @@ public class GalleryFullscreenActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * Handle menu item selection
+     * @param item The selected menu item
+     * @return unused
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -144,16 +162,19 @@ public class GalleryFullscreenActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
 
             case R.id.btn_edit_export_backExport:
-                // magic numbers because I could not find how to get the views size
-                int xPos1 = 0;
-                int yPos1 = 282;
 
-                int xPos2 = 1080;
-                int yPos2 = 1440;
+                // get coordinates for image
+                int xPos1 = fullscreenImageView.getLeft();
+                int yPos1 = Math.round(fullscreenImageView.getPivotX() / 2 + 12);
 
+                int xPos2 = fullscreenImageView.getRight();
+                int yPos2 = fullscreenImageView.getHeight() - (yPos1 / 2) - 1;
+
+                // generate a bitmap
                 Bitmap screenshot = renderImage();
                 Bitmap screenshotCropped = Bitmap.createBitmap(screenshot, xPos1, yPos1, xPos2, yPos2);
 
+                // open share drawer
                 shareImage(screenshotCropped);
 
                 return super.onOptionsItemSelected(item);
@@ -164,6 +185,10 @@ public class GalleryFullscreenActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Takes a screenshot of the phone
+     * @return A bitmap of the screenshot
+     */
     private Bitmap renderImage() {
         View v1 = getWindow().getDecorView().getRootView();
         v1.setDrawingCacheEnabled(true);
@@ -173,12 +198,16 @@ public class GalleryFullscreenActivity extends AppCompatActivity {
         return bitmap;
     }
 
+    /**
+     * Finalizes the bitmap and opens a sharing drawer
+     * @param mBitmap The bitmap to share
+     */
     private void shareImage(Bitmap mBitmap) {
         Intent share = new Intent(Intent.ACTION_SEND);
         share.setType("image/jpeg");
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        File f = new File(android.os.Environment.getExternalStorageDirectory() + File.separator + "temporary_file.jpg");
+        File f = new File(android.os.Environment.getExternalStorageDirectory() + File.separator + "where_are_you.jpg");
         try {
             f.createNewFile();
             FileOutputStream fo = new FileOutputStream(f);
@@ -186,7 +215,7 @@ public class GalleryFullscreenActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        share.putExtra(Intent.EXTRA_STREAM, Uri.parse(android.os.Environment.getExternalStorageDirectory() + File.separator + "temporary_file.jpg"));
+        share.putExtra(Intent.EXTRA_STREAM, Uri.parse(android.os.Environment.getExternalStorageDirectory() + File.separator + "where_are_you.jpg"));
         startActivity(Intent.createChooser(share, getString(R.string.str_share_image)));
     }
 }

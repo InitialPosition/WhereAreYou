@@ -18,6 +18,10 @@ import java.util.List;
 import de.fhe.wayinc.whereareyou.model.SavedImage;
 import timber.log.Timber;
 
+/**
+ * This class handles the saving / loading of images.
+ */
+
 public class ImageStoreHandler {
 
     private final static String SHARED_PREFERENCES_FILE = "images";
@@ -25,20 +29,45 @@ public class ImageStoreHandler {
 
     private List<SavedImage> imageList = new ArrayList<>();
 
+    /**
+     * Get the amount of images in the list
+     * @return The image count
+     */
     public int getImageListSize() {
         return imageList.size();
     }
 
+    /**
+     * Get the path for an image
+     * @param index The index on the list
+     * @return The path of the image
+     */
     public String getImagePathFromImageList(int index) {
         Timber.d(MessageFormat.format("Requested image {0}", index));
         return imageList.get(index).getPath();
     }
 
+    /**
+     * Get a SavedImage object
+     * @param index The index in the list
+     * @return A reference to a SavedImage object
+     */
     public SavedImage getImageObjectFromImageList(int index) {
         Timber.d(MessageFormat.format("Requested image {0}", index));
         return imageList.get(index);
     }
 
+    /**
+     * Save a new image object to the image list
+     * @param image The image URI
+     * @param icon The weather icon
+     * @param latLon The latitude / longitude
+     * @param city The current city
+     * @param temp The current temperature
+     * @param fact The fact for the day
+     * @param color The color to render the text in
+     * @param date The current date
+     */
     public void saveImageToImageList(File image, String icon, String latLon, String city, double temp, String fact, int color, String date) {
         String imagePath = image.getAbsolutePath();
         Timber.d(MessageFormat.format("Saving image path {0}", imagePath));
@@ -47,11 +76,18 @@ public class ImageStoreHandler {
         imageList.add(newImage);
     }
 
+    /**
+     * Delete everything on the image list
+     */
     public void clearImageList() {
         Timber.d("Image list cleared");
         imageList.clear();
     }
 
+    /**
+     * Save the local image list to the hard drive
+     * @param ctx The application context
+     */
     public void writeOutImageList(Context ctx) {
         Timber.d("Saving image list to hard drive...");
 
@@ -61,6 +97,10 @@ public class ImageStoreHandler {
         editor.putString(SHARED_PREFERENCES_KEY, imageListToString()).apply();
     }
 
+    /**
+     * Load the saved image list from the hard drive
+     * @param ctx The application context
+     */
     public void loadImageListFromDisk(Context ctx) {
         Timber.d("Loading image list...");
         clearImageList();
@@ -74,6 +114,10 @@ public class ImageStoreHandler {
         imageList = gson.fromJson(listJson, type);
     }
 
+    /**
+     * Remove an image from the list
+     * @param position The position to remove
+     */
     public void removeImageFromList(int position) {
         Timber.i(MessageFormat.format("Removing image {0}...", position));
 
@@ -87,12 +131,21 @@ public class ImageStoreHandler {
         imageList.remove(position);
     }
 
+    /**
+     * Encode the image list into a string
+     * @return The converted list
+     */
     private String imageListToString() {
         Gson gson = new Gson();
 
         return gson.toJson(imageList);
     }
 
+    /**
+     * Check whether an image is on the list
+     * @param image The file to check
+     * @return Whether the image is on the list
+     */
     public boolean isImageOnList(File image) {
         String imagePath = image.getAbsolutePath();
 
@@ -111,6 +164,12 @@ public class ImageStoreHandler {
         return false;
     }
 
+    /**
+     * Convert the image list into a scaled bitmap list
+     * @param width The target width of the bitmaps
+     * @param height The target height of the bitmaps
+     * @return The bitmap list
+     */
     public List<Bitmap> getImageListAsScaledBitmaps(int width, int height) {
         List<Bitmap> convertedList = new ArrayList<>();
 

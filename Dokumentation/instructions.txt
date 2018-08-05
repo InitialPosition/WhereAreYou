@@ -14,18 +14,17 @@ This app allows the user to take an image on their phone. The app then collects 
 ### OR
 1. Download the apk for smartphones from<br>
 https://drive.google.com/open?id=12i59zMI6V-L1ty0wiUc7OgaQ5wlI4m0B
-2. Install the app on your android phone
+1. Install the app on your android phone
 
 ## How To Use
 The app has a simple premise. Take a picture and decide which information should be added to the picture.
-1. In the start menu, click on "Take Picture".
-2. Take a photo with your camera.
-3. Open the template drawer
-4. Open the template drawer by swiping from the left edge of the screen to the center of the display.
-5. Choose one of five templates and select it with one touch.
-6. Save your image by clicking on the check mark in the upper right corner of the menu bar.<br>
-<b>Done</b>
+1. In the start menu, select "Take Picture".
+1. Take a photo with your camera.
+1. Open the template drawer by swiping from the left border of the screen to the center of the display.
+1. Choose one of the templates and select it.
+1. Save your image by clicking on the check mark in the upper right corner of the menu bar.<br>
+
 ### Extra
-- Take a look at all the pictures you have already taken in the Galarie. To do this, click on "Gallery" in the main menu.
-- Share your pictures by selecting them again in the gallery and then pressing the right icon in the top right corner of the menu bar.
-- View their achievements by touching the trophy in the top right corner of the main menu.
+- Use the gallery to look at the pictures you already took. To do this, click on "Gallery" in the main menu.
+- Share your pictures by selecting them in the gallery and then pressing the share icon in the top right corner of the menu bar.
+- View your achievements by touching the trophy in the top right corner of the main menu.

@@ -26,7 +26,6 @@ public class AchievementActivity extends AppCompatActivity {
         TextView title = findViewById(R.id.achievements_title);
         FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", title);
 
-
         achievements.add((TextView) findViewById(R.id.achievements_text_image_name_01));
         achievements.add((TextView) findViewById(R.id.achievements_text_image_desc_01));
         achievements.add((TextView) findViewById(R.id.achievements_text_image_name_02));
@@ -82,6 +81,10 @@ public class AchievementActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Unlock an achievement
+     * @param ach The achievement ID to unlock
+     */
     public void achieveAMilestone(int ach) {
         for (int i = ach; i <= ach + 1; i++) {
             achievements.get(i).setAlpha(1.0f);
@@ -89,6 +92,11 @@ public class AchievementActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Set the menu
+     * @param menu The menu to set
+     * @return unused
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -97,6 +105,11 @@ public class AchievementActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * Handle item menu selection
+     * @param item The selected menu item
+     * @return unused
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

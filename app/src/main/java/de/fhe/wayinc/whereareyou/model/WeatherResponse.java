@@ -4,6 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+/**
+ * This class acts as a model for the weather API response.
+ * It saves all the data the API returns.
+ */
+
 public class WeatherResponse {
     private Coord coord;
     private List<Weather> weather;
@@ -19,10 +24,10 @@ public class WeatherResponse {
     private String name;
     private int cod;
 
-    public Coord getCoord() {
-        return coord;
-    }
-
+    /**
+     * Get basic informations about the weather
+     * @return A reference to the weather object holding info
+     */
     public List<Weather> getWeather() {
         return weather;
     }
@@ -31,82 +36,75 @@ public class WeatherResponse {
         return base;
     }   // Internal parameter
 
+    /**
+     * Get the main info for the weather element
+     * @return A reference to a Main object
+     */
     public Main getMain() {
         return main;
     }   // Isn´t readable. Needs to be parsed.
 
-    public Wind getWind() {
-        return wind;
-    }   // Isn´t readable. Needs to be parsed.
-
-    public Clouds getClouds() {
-        return clouds;
-    }   // Isn´t readable. Needs to be parsed.
-
-    public Rain getRain() {
-        return rain;
-    }   // Isn´t readable. Needs to be parsed.
-
-    public Snow getSnow() {
-        return snow;
-    }   // Isn´t readable. Needs to be parsed.
-
-    public int getDt() {
-        return dt;
-    }   // Time of data calculation in unix timestamp
-
-    public Sys getSys() {
-        return sys;
-    }   // Isn´t readable. Needs to be parsed.
-
+    /**
+     * Get the city code
+     * @return The city code
+     */
     public int getId() {
         return id;
-    }   // Returns strange city code
-
-    public String getName() {
-        return name;
-    } // Returns the name of the city
-
-    public int getCod() {
-        return cod;
-    }   // Internal parameter. Not the same as Coord.
-
-    public class Coord {
-        private double lon;
-        private double lat;
-
-        public double getLon() {
-            return lon;
-        }
-
-        public double getLat() {
-            return lat;
-        }
     }
 
+    /**
+     * Get the name of the current city
+     * @return The name of the city
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Saves position info
+     */
+    private class Coord {
+        private double lon;
+        private double lat;
+    }
+
+    /**
+     * Saves general weather info
+     */
     public class Weather {
         private int id;
         private String main;
         private String description;
         private String icon;
 
+        /**
+         * Get the call ID
+         * @return The ID
+         */
         public int getId() {
             return id;
         }
 
-        public String getMain() {
-            return main;
-        }
-
+        /**
+         * Get a short weather description
+         * @return The description
+         */
         public String getDescription() {
             return description;
         }
 
+        /**
+         * Get the URL for the current weather icon
+         * @return The URL
+         */
         public String getIcon() {
             return icon;
         }
     }
 
+    /**
+     * Saves more basic info
+     */
     public class Main {
         private double temp;
         private double pressure;
@@ -116,68 +114,55 @@ public class WeatherResponse {
         private double sea_level;
         private double grnd_level;
 
+        /**
+         * Get the current temperature
+         * @return The temperature in Kelvin
+         */
         public double getTemp() {
             return temp;
-        }   // Returns the temperature in kelvin
-
-        public double getPressure() {
-            return pressure;
-        }   // Returns the atmospheric pressure in hPa
-
-        public double getHumidity() {
-            return humidity;
-        }   // Returns the humidity in percent
-
-        public double getTemp_min() {
-            return temp_min;
-        }   // Returns min temperature in the city
-
-        public double getTemp_max() {
-            return temp_max;
-        }   // Returns max temperature in the city
-
-        public double getSea_level() {
-            return sea_level;
-        }   // Returns atmospheric pressure on the sea level in hPa
-
-        public double getGrnd_level() {
-            return grnd_level;
-        }   // Returns atmospheric pressure on the ground level in hPa
+        }
     }
 
-    public class Wind {
+    /**
+     * Saves wind info
+     */
+    private class Wind {
         private double speed;
         private double deg;
-
-        public double getSpeed() {
-            return speed;
-        }   // Returns wind speed in m/s
-
-        public double getDeg() {
-            return deg;
-        }   //Returns the direction of the wind
     }
 
+    /**
+     * Saves cloud data
+     */
     public class Clouds {
         private int all;
 
-        public int getAll() { return all; }   // Returns ammount of clouds in percent
+        /**
+         * Get the amount of clouds in percent
+         * @return The amount
+         */
+        public int getAll() { return all; }
     }
 
-    public class Rain {
+    /**
+     * Saves rain info
+     */
+    private class Rain {
         @SerializedName("3h")
         private int rain3h;
-
-        public int getRain3h() { return rain3h; }   // Returns rain volume for the last 3 hours
     }
 
-    public class Snow {
+    /**
+     * Saves snow info
+     */
+    private class Snow {
         @SerializedName("3h")
         private int snow3h;
-
-        public int getSnow3h() { return snow3h; }   // Returns snow volume for the last 3 hours
     }
 
+    /**
+     * Saves basic info
+     */
     public class Sys {
         private double message;
         private String country;
@@ -187,17 +172,5 @@ public class WeatherResponse {
         public double getMessage() {
             return message;
         }   // Returns an internal parameter
-
-        public String getCountry() {
-            return country;
-        }   // Return country code
-
-        public int getSunrise() {
-            return sunrise;
-        }   // Returns Sunrise in unix timestamp
-
-        public int getSunset() {
-            return sunset;
-        }   // Returns Sunset in unix timestamp
     }
 }

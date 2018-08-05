@@ -37,17 +37,22 @@ public class GalleryActivity extends AppCompatActivity {
 
         ctx = this;
 
+        // get layout elements
         TextView title = findViewById(R.id.gallery_title);
+
         FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", title);
 
+        // create a dialog builder
         builder = new android.support.v7.app.AlertDialog.Builder(this);
 
+        // create image handler and gridview adapter
         final ImageStoreHandler imageStoreHandler = new ImageStoreHandler();
         imageStoreHandler.loadImageListFromDisk(ctx);
 
         final GridView mainGridView = findViewById(R.id.grid_view_gallery);
         final GalleryAdapter galleryAdapter = new GalleryAdapter(this, null);
 
+        // load the images in a new thread
         Thread thread = new Thread() {
             @Override
             public void run() {
@@ -66,6 +71,7 @@ public class GalleryActivity extends AppCompatActivity {
 
         canClick = true;
 
+        // handle clicking an image
         mainGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -77,11 +83,13 @@ public class GalleryActivity extends AppCompatActivity {
             }
         });
 
+        // handle deleting an image
         mainGridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
                 canClick = false;
 
+                // show a confirmation dialog
                 builder.setMessage("Do you really want to delete this image?");
                 builder.setCancelable(false);
                 builder.setPositiveButtonIcon(getDrawable(R.drawable.ic_check_black_24dp));
@@ -91,6 +99,7 @@ public class GalleryActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         canClick = true;
 
+                        // remove the image from the list
                         imageStoreHandler.removeImageFromList(position);
                         imageStoreHandler.writeOutImageList(getBaseContext());
 
@@ -112,6 +121,11 @@ public class GalleryActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Set the correct menu
+     * @param menu The menu to set
+     * @return unused
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -120,6 +134,11 @@ public class GalleryActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * Handle menu item selection
+     * @param item The selected menu item
+     * @return unused
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

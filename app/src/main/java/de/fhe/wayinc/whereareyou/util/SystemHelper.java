@@ -1,9 +1,5 @@
 package de.fhe.wayinc.whereareyou.util;
 
-/*
-        This class provides functions from system calls
- */
-
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -16,15 +12,26 @@ import java.util.List;
 
 import de.fhe.wayinc.whereareyou.R;
 
+/**
+ * This class provides functions from system calls
+ */
+
 public class SystemHelper {
 
-    // get the current time stamp
+    /**
+     * Get the current UNIX timestamp
+     * @return The current UNIX timestamp
+     */
     private static String getCurrentTimeStamp() {
         Long timestamp = System.currentTimeMillis() / 1000;
         return timestamp.toString();
     }
 
-    // gets a random background for the main menu
+    /**
+     * Selects a random background for the main menu
+     * @param ctx The application context
+     * @return A random background drawable
+     */
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static Drawable getRandomBackgroundDrawable(Context ctx) {
         List<Integer> drawables = new ArrayList<>();

@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         // plant timber debug log tree
         Timber.plant(new Timber.DebugTree());
 
-        // find elements
+        // get layout elements
         TextView mainTitle = findViewById(R.id.txt_mainTitle);
         Button btn_newImage = findViewById(R.id.btn_takePicture);
         Button btn_gallery = findViewById(R.id.btn_gallery);
@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         // load the correct font into the title
         FontHelper.setExternalFont(this, "fonts/BebasNeue-Regular.ttf", mainTitle);
 
+        // get the current location
         FusedLocationProviderClient mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         mFusedLocationProviderClient.getLastLocation()
                 .addOnSuccessListener(this, new OnSuccessListener<Location>() {
@@ -124,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
+/*
         mainTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,22 +135,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(callAPIsIntent);
             }
         });
+*/
 
+        // open the gallery
         btn_gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(getApplicationContext(), "Gallery Button clicked", Toast.LENGTH_SHORT).show();
-               /* Intent callAPIsIntent = new Intent(MainActivity.this, APICallPrintActivity.class);
-
-                callAPIsIntent.putExtra(EXTRA_MESSAGE, foundLocation);
-                startActivity(callAPIsIntent);
-                */
-
                 Intent galleryIntent = new Intent(MainActivity.this, GalleryActivity.class);
                 startActivity(galleryIntent);
             }
         });
 
+        // open the achievement screen
         btn_achievements.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // open the credits screen
         btn_credits.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,7 +165,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
+    /**
+     * Handle permission requesting
+     * @param requestCode The request ID
+     * @param permissions The permissions in the request
+     * @param grantResults Whether the permission was granted
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
@@ -186,6 +189,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Sends the taken image to the editing activity
+     * @param requestCode The code for the request
+     * @param resultCode The result of the request
+     * @param data The data containing the image
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -193,7 +202,6 @@ public class MainActivity extends AppCompatActivity {
             case TAKE_PICTURE:
                 if (resultCode == Activity.RESULT_OK) {
                     Intent imageProcessIntent = new Intent(MainActivity.this, NewImageActivity.class);
-                    Bundle imageData = data.getExtras();
                     imageProcessIntent.putExtra(EXTRA_IMAGE, mCurrentPhotoPath);
                     imageProcessIntent.putExtra(EXTRA_MESSAGE, foundLocation);
                     startActivity(imageProcessIntent);
@@ -204,6 +212,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Creates a new temporary image file
+     * @return The file handle
+     * @throws IOException
+     */
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
@@ -215,6 +228,9 @@ public class MainActivity extends AppCompatActivity {
         return image;
     }
 
+    /**
+     * Takes a new image by calling a camera intent
+     */
     private void takeNewImage() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 

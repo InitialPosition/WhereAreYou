@@ -46,7 +46,7 @@ public class NewImageActivity extends AppCompatActivity {
 
     private static final String URL_NUMBERS = "http://numbersapi.com/";
 
-    // actual variables
+    // internally used variables
     private String month;
     private String day;
     private String currentCity;
@@ -325,6 +325,10 @@ public class NewImageActivity extends AppCompatActivity {
         );
     }
 
+    /**
+     * Calls the number API to get a fact for the day
+     * @param handler A numbers API handler
+     */
     private void newNumberFact(APIHandler handler) {
         final Call<String> numberFactCall = handler.getNumberFact(month, day);
         numberFactCall.enqueue(new Callback<String>() {
@@ -344,6 +348,11 @@ public class NewImageActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Sets the top navigation menu
+     * @param menu The menu to set
+     * @return unused
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -352,12 +361,18 @@ public class NewImageActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * Handle menu selections
+     * @param item The selected item
+     * @return unused
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         File image = new File(imagePath);
 
         switch (item.getItemId()) {
             case R.id.btn_edit_back:
+                // delete the temp image
                 if (image.exists()) {
                     image.delete();
                     Timber.i(MessageFormat.format("Image {0} deleted", imagePath));
@@ -366,17 +381,19 @@ public class NewImageActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.btn_edit_done:
-                // TODO process edited image
+                // load the image list
                 if (imageStoreHandler == null) {
                     imageStoreHandler = new ImageStoreHandler();
                     imageStoreHandler.loadImageListFromDisk(this);
                 }
 
+                // only add the image if it is not already on the list
                 if (!imageStoreHandler.isImageOnList(image)) {
                     imageStoreHandler.saveImageToImageList(image, weatherIcon_out, latLon_out, currentCity_out, temp_out, fact_out, textColor, date_out);
                     imageStoreHandler.writeOutImageList(this);
                 }
 
+                // achievement counter increment
                 StatsHelper.incrementImageStat(this);
                 if (StatsHelper.cityIsNew(this, currentCity)) {
                     StatsHelper.addCityToStat(this, currentCity);
