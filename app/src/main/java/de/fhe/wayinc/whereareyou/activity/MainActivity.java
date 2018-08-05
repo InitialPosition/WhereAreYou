@@ -125,17 +125,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-/*
-        mainTitle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent callAPIsIntent = new Intent(MainActivity.this, APICallPrintActivity.class);
-
-                callAPIsIntent.putExtra(EXTRA_MESSAGE, foundLocation);
-                startActivity(callAPIsIntent);
-            }
-        });
-*/
 
         // open the gallery
         btn_gallery.setOnClickListener(new View.OnClickListener() {
