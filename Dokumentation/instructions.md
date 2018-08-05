@@ -12,8 +12,8 @@ This app allows the user to take an image on their phone. The app then collects 
 `git clone https://github.com/Syrapt0r/WhereAreYou`
 1. Open the app in Android Studio
 ### OR
-1. Download the apk(outdated version) for smartphones from<br>
-https://drive.google.com/open?id=12i59zMI6V-L1ty0wiUc7OgaQ5wlI4m0B
+1. Download the apk for smartphones from<br>
+https://drive.google.com/open?id=1J3ejbJY6mgNU0b2QWe1qVdoSfSXnV3Gi
 1. Install the app on your android phone
 
 ## How To Use
