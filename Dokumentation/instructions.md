@@ -35,4 +35,4 @@ The app has a simple premise. Take a picture and decide which information should
 1. We then display different layout elements above the image. To save the image, the file path of the image is sent to the gallery and the layout elements are saved in a class.
 1. To share it later with other people and platforms, we take a screenshot of the image in the gallery and send it to other systems.
 
-<p align="center">App developed with ♥ by Jonathan M. and Felix K.</p>
+<p align="center">App developed by Jonathan M. and Felix K.</p>
