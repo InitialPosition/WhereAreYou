@@ -1,0 +1,3 @@
+Jonathan Müller: Generelles Design, Design Edit Activity, Design Achievement Activity, Bildbearbeitung, Layouts, API Calls, Speichern Statistiken, Achievements
+
+Felix Kießling: Generelles Design, Design Hauptmenü, Design Gallery Activity, Design Fullscreen Activity, Design Credits Activity, Image Intents, API Handling, API Modelle, Speichern Bilder, Speichern Statistiken, Sharing, Gallerie
